@@ -55,10 +55,6 @@ public class MatrixIt implements Iterator<Integer> {
         }
         return data[row][column++];
     }
-//        if (!hasNext()) {
-//            new NoSuchElementException();
-//        }
-//        return data[row][column++];
 
     @Override
     public String toString() {
