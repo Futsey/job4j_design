@@ -16,7 +16,13 @@ public class FlatMapIt<T> implements Iterator<T> {
 
     @Override
     public boolean hasNext() {
-        selectCurrentIterator();
+        while (data.hasNext()) {
+            Iterator<T> nextIterator = data.next();
+            if (nextIterator.hasNext()) {
+                cursor = nextIterator;
+                break;
+            }
+        }
         return (cursor != null && cursor.hasNext());
     }
 
@@ -26,20 +32,6 @@ public class FlatMapIt<T> implements Iterator<T> {
             throw new NoSuchElementException();
         }
         return cursor.next();
-    }
-
-    private void selectCurrentIterator() {
-        if (cursor != null && cursor.hasNext()) {
-            return;
-        }
-        cursor = null;
-        while (data.hasNext()) {
-            Iterator<T> nextIterator = data.next();
-            if (nextIterator.hasNext()) {
-                cursor = nextIterator;
-                break;
-            }
-        }
     }
 
     public static void main(String[] args) {
