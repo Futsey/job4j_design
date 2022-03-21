@@ -36,9 +36,9 @@ public class FlatMapIt<T> implements Iterator<T> {
                 List.of(4, 5, 6).iterator(),
                 List.of(7, 8, 9).iterator()
         ).iterator();
-        FlatMapIt<Integer> flat = new FlatMapIt<>(data);
-        while (flat.hasNext()) {
-            System.out.println(flat.next());
+        FlatMapIt<Integer> flatMapIt = new FlatMapIt<>(data);
+        while (flatMapIt.hasNext()) {
+            System.out.println(flatMapIt.next());
         }
     }
 }
