@@ -15,13 +15,13 @@ public class MemStore<T extends Base> implements Store<T> {
     @Override
     public boolean replace(String id, T model) {
         storage.replace(id, model);
-        return true;
+        return false;
     }
 
     @Override
     public boolean delete(String id) {
         storage.remove(id);
-        return true;
+        return false;
     }
 
     @Override
