@@ -14,14 +14,24 @@ public class MemStore<T extends Base> implements Store<T> {
 
     @Override
     public boolean replace(String id, T model) {
-        storage.replace(id, model);
-        return false;
+        try {
+            storage.put(id, model);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     @Override
     public boolean delete(String id) {
-        storage.remove(id);
-        return false;
+        try {
+            storage.remove(id);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     @Override
