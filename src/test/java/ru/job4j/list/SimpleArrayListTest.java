@@ -27,8 +27,19 @@ public class SimpleArrayListTest {
     }
 
     @Test
-    public void whenAddAndGetByCorrectIndex() {
+    public void whenGetByCorrectIndex() {
         Assert.assertEquals(Integer.valueOf(1), list.get(0));
+    }
+
+    @Test
+    public void whenAddAndGetByCorrectIndex() {
+        list.add(5);
+        list.size();
+        list.add(6);
+        list.size();
+        list.add(7);
+        list.size();
+        Assert.assertEquals(Integer.valueOf(7), list.get(4));
     }
 
     @Test(expected = IndexOutOfBoundsException.class)

@@ -1,6 +1,5 @@
 package ru.job4j.list;
 
-import java.lang.reflect.Array;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -39,8 +38,11 @@ public class SimpleArrayList<T> implements List<T> {
      */
     private T[] grow(T[] container) {
         int grow = container.length * 2;
-        container = (T[]) new Object[grow];
-        return container;
+        T[] newContainer = (T[]) new Object[grow];
+        for (int i = 0; i < container.length; i++) {
+            newContainer[i] = container[i];
+        }
+        return newContainer;
     }
 
     /**
@@ -52,7 +54,7 @@ public class SimpleArrayList<T> implements List<T> {
     @Override
     public void add(T value) {
         if (size == container.length) {
-            grow(container);
+            container = grow(container);
             modCount++;
         } else {
             container[size] = value;
