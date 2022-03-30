@@ -7,7 +7,10 @@ import org.junit.Test;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.stream.IntStream;
+
+import static org.junit.Assert.assertTrue;
 
 public class SimpleArrayListTest {
 
@@ -34,17 +37,39 @@ public class SimpleArrayListTest {
     @Test
     public void whenAddAndGetByCorrectIndex() {
         list.add(5);
-        list.size();
+        System.out.println(list);
         list.add(6);
-        list.size();
         list.add(7);
-        list.size();
-        Assert.assertEquals(Integer.valueOf(7), list.get(4));
+        System.out.println(list);
+        list.add(7);
+        System.out.println(list);
+        list.add(7);
+        System.out.println(list);
+        list.add(7);
+        System.out.println(list);
+        list.add(7);
+        Assert.assertEquals(Integer.valueOf(7), list.get(7));
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
     public void whenAddAndGetByIncorrectIndexThenGetException() {
         list.get(5);
+    }
+
+    @Test public void whenExpand() {
+        list = new SimpleArrayList<>(2);
+        list.add(1);
+        assertTrue(Objects.equals(list.get(0), 1));
+        list.add(2);
+        System.out.println(list);
+        assertTrue(Objects.equals(list.get(1), 2));
+        list.add(3);
+        System.out.println(list);
+        System.out.println(list.size());
+        assertTrue(Objects.equals(list.get(2), 3));
+        list.add(4);
+        assertTrue(Objects.equals(list.get(2), 3));
+        System.out.println(list.get(3));
     }
 
     @Test
@@ -114,11 +139,11 @@ public class SimpleArrayListTest {
     @Test
     public void whenCheckIterator() {
         Iterator<Integer> iterator = list.iterator();
-        Assert.assertTrue(iterator.hasNext());
+        assertTrue(iterator.hasNext());
         Assert.assertEquals(Integer.valueOf(1), iterator.next());
-        Assert.assertTrue(iterator.hasNext());
+        assertTrue(iterator.hasNext());
         Assert.assertEquals(Integer.valueOf(2), iterator.next());
-        Assert.assertTrue(iterator.hasNext());
+        assertTrue(iterator.hasNext());
         Assert.assertEquals(Integer.valueOf(3), iterator.next());
         Assert.assertFalse(iterator.hasNext());
     }

@@ -1,9 +1,6 @@
 package ru.job4j.list;
 
-import java.util.ConcurrentModificationException;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Класс является собственной реализацией
@@ -53,12 +50,12 @@ public class SimpleArrayList<T> implements List<T> {
     public void add(T value) {
         if (size == container.length) {
             container = grow(container);
-            modCount++;
+            container[size] = value;
         } else {
             container[size] = value;
-            size++;
-            modCount++;
         }
+        size++;
+        modCount++;
     }
 
     /**
@@ -139,5 +136,14 @@ public class SimpleArrayList<T> implements List<T> {
                 return container[pointer++];
             }
         };
+    }
+
+    @Override
+    public String toString() {
+        return "SimpleArrayList{"
+                + "container=" + Arrays.toString(container)
+                + ", size=" + size
+                + ", modCount=" + modCount
+                + '}';
     }
 }
