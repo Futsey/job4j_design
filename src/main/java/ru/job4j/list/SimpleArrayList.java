@@ -50,10 +50,8 @@ public class SimpleArrayList<T> implements List<T> {
     public void add(T value) {
         if (size == container.length) {
             container = grow(container);
-            container[size] = value;
-        } else {
-            container[size] = value;
         }
+        container[size] = value;
         size++;
         modCount++;
     }
