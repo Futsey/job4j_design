@@ -72,6 +72,22 @@ public class SimpleArrayListTest {
         System.out.println(list.get(3));
     }
 
+    @Test public void whenAddFromZeroPoint() {
+        list = new SimpleArrayList<>(0);
+        list.add(1);
+        assertTrue(Objects.equals(list.get(0), 1));
+        list.add(2);
+        System.out.println(list);
+        assertTrue(Objects.equals(list.get(1), 2));
+        list.add(3);
+        System.out.println(list);
+        System.out.println(list.size());
+        assertTrue(Objects.equals(list.get(2), 3));
+        list.add(4);
+        assertTrue(Objects.equals(list.get(2), 3));
+        System.out.println(list.get(3));
+    }
+
     @Test
     public void whenRemoveThenGetValueAndSizeDecrease() {
         Assert.assertEquals(3, list.size());

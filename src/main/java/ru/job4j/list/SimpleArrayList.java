@@ -28,28 +28,25 @@ public class SimpleArrayList<T> implements List<T> {
     }
 
     /**
-     * Метод принимает массив
-     * @param container
-     * удваивает Capacity
-     * @return массив с увеличенным Capacity
+     * Метод принимает массив и удваивает Capacity в новом массиве
      */
-    private T[] grow(T[] container) {
-        int grow = container.length * 2;
-        T[] newContainer = (T[]) new Object[grow];
-        System.arraycopy(container, 0, newContainer, 0, container.length);
-        return newContainer;
+    private void grow() {
+        if (container.length == 0) {
+            container = Arrays.copyOf(container, 10);
+        }
+        container = Arrays.copyOf(container, container.length * 2);
     }
 
     /**
      * Метод пдобавляет новый элемент в массив, прежде проверив достаточно-ли места (Capacity)
      * Если места (Capacity) недостаточно, то с помощью метода
-     * {@link #grow(Object[])}
+     * {@link #grow()}
      * производим расширение массива, дополнительно обновляя счетчики size и modCount
      */
     @Override
     public void add(T value) {
-        if (size == container.length) {
-            container = grow(container);
+        if (size == container.length || container.length == 0) {
+            grow();
         }
         container[size] = value;
         size++;
