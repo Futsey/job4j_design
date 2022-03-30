@@ -43,6 +43,12 @@ public class SimpleArrayListTest {
         Assert.assertEquals(2, list.size());
     }
 
+    @Test
+    public void whenRemoveLastElementThenGetNull() {
+        list.remove(2);
+        Assert.assertNull(list.get(2));
+    }
+
     @Test(expected = IndexOutOfBoundsException.class)
     public void whenRemoveByIncorrectIndexThenGetException() {
         list.remove(5);
