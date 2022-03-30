@@ -39,9 +39,7 @@ public class SimpleArrayList<T> implements List<T> {
     private T[] grow(T[] container) {
         int grow = container.length * 2;
         T[] newContainer = (T[]) new Object[grow];
-        for (int i = 0; i < container.length; i++) {
-            newContainer[i] = container[i];
-        }
+        System.arraycopy(container, 0, newContainer, 0, container.length);
         return newContainer;
     }
 
