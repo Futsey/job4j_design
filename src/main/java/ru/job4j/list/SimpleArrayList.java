@@ -59,9 +59,8 @@ public class SimpleArrayList<T> implements List<T> {
      */
     @Override
     public T set(int index, T newValue) {
-        T tmp = null;
+        T tmp = container[index];
         if (Objects.checkIndex(index, container.length) > 0) {
-            tmp = container[index];
             container[index] = newValue;
         }
         return tmp;
