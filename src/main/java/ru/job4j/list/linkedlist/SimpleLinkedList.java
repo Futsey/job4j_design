@@ -54,8 +54,6 @@ public class SimpleLinkedList<E> implements List<E> {
                 return el;
             }
         };
-
-
     }
 
     @Override
