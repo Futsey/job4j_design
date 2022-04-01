@@ -59,10 +59,9 @@ public class SimpleArrayList<T> implements List<T> {
      */
     @Override
     public T set(int index, T newValue) {
+        Objects.checkIndex(index, container.length);
         T tmp = container[index];
-        if (Objects.checkIndex(index, container.length) > 0) {
-            container[index] = newValue;
-        }
+        container[index] = newValue;
         return tmp;
     }
 
@@ -73,9 +72,8 @@ public class SimpleArrayList<T> implements List<T> {
      */
     @Override
     public T remove(int index) {
-        T tmp = null;
-        if (Objects.checkIndex(index, container.length) > 0) {
-            tmp = container[index];
+        Objects.checkIndex(index, container.length);
+        T tmp = container[index];
             for (int i = index; i < container.length; i++) {
                 if (i != container.length - 1) {
                     container[i] = container[i + 1];
@@ -85,7 +83,6 @@ public class SimpleArrayList<T> implements List<T> {
             }
             size--;
             modCount++;
-        }
         return tmp;
     }
 
