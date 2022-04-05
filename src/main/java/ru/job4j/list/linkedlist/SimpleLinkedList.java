@@ -3,15 +3,37 @@ package ru.job4j.list.linkedlist;
 import java.util.Iterator;
 import java.util.Objects;
 
+/**
+ * Класс является собственной реализацией (двусвязный список)
+ * @see java.util.LinkedList
+ * реализует собственную версию
+ * @see java.util.List
+ * @author ANDREW PETRUSHIN (JOB4J Project)
+ * @version 1.0
+ */
 public class SimpleLinkedList<E> implements List<E> {
+    /**
+     * поле modCount является счетчиком по добавлению\удалению элементов
+     * поле head является первым элементом в множестве
+     * поле tail является последним элементом в множестве
+     */
     int modCount;
     Node<E> head;
     Node<E> tail;
 
+    /**
+     * метод проверяет, является ли самый первый элемент null-значением
+     */
     public boolean isEmpty() {
         return head == null;
     }
 
+    /**
+     * метод добавляет новый элемент в множество, производя при этом валидацию первого элемента на null-значение
+     * {@link #isEmpty()}
+     * в случае, если элемент имеет null-значение, то первая ссылка будет назначена первым (head-элементом)
+     * если элемент не имеет null-значение, элементу присваиваются ссылки на предыдущий и следующий элементы
+     */
     @Override
     public void add(E value) {
         Node<E> newNode = new Node<>(value);
@@ -25,6 +47,10 @@ public class SimpleLinkedList<E> implements List<E> {
         modCount++;
     }
 
+    /**
+     * метод получает искомый элемент по индексу, предварительно проверив диапозон индексов
+     * @return значение по индексу
+     */
     @Override
     public E get(int index) {
         Objects.checkIndex(index, modCount);
