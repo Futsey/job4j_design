@@ -1,9 +1,6 @@
 package ru.job4j.list.stack;
 
 import ru.job4j.list.linkedlist.ForwardLinked;
-import ru.job4j.list.linkedlist.Node;
-
-import java.util.Comparator;
 
 /**
  * Класс является собственной реализацией контейнера
@@ -23,14 +20,14 @@ public class SimpleStack<T> {
      * метод удаляет первый элемент в множестве
      * @return старое значение (значение удаленного элемента)
      */
-    public T pop() {
+    public T deleteFirstElement() {
         return linked.deleteFirst();
     }
 
     /**
      * метод добавляет элемент в самое начало множества
      */
-    public void push(T value) {
+    public void pushFirstElement(T value) {
         linked.addFirst(value);
     }
 
