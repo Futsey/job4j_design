@@ -39,10 +39,8 @@ public class ForwardLinked<T> implements Iterable<T> {
     /**
      * метод добавляет новый первый элемент в множество
      */
-    public T addFirst(T value) {
-        Node<T> newEl = new Node<>(value, head);
-        head = newEl;
-        return (T) newEl;
+    public void addFirst(T value) {
+        head = new Node<>(value, head);
     }
 
     /**

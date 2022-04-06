@@ -30,8 +30,4 @@ public class SimpleStack<T> {
     public void pushFirstElement(T value) {
         linked.addFirst(value);
     }
-
-    public boolean hasNext() {
-        return linked.iterator().hasNext();
-    }
 }
