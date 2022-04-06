@@ -11,16 +11,16 @@ public class SimpleStackTest {
     public void whenPushThenPoll() {
         SimpleStack<Integer> stack = new SimpleStack<>();
         stack.pushFirstElement(1);
-        assertThat(stack.deleteFirstElement(), is(1));
+        assertThat(stack.pop(), is(1));
     }
 
     @Test
     public void whenPushPollThenPushPoll() {
         SimpleStack<Integer> stack = new SimpleStack<>();
         stack.pushFirstElement(1);
-        stack.deleteFirstElement();
+        stack.pop();
         stack.pushFirstElement(2);
-        assertThat(stack.deleteFirstElement(), is(2));
+        assertThat(stack.pop(), is(2));
     }
 
     @Test
@@ -28,8 +28,8 @@ public class SimpleStackTest {
         SimpleStack<Integer> stack = new SimpleStack<>();
         stack.pushFirstElement(1);
         stack.pushFirstElement(2);
-        stack.deleteFirstElement();
-        assertThat(stack.deleteFirstElement(), is(1));
+        stack.pop();
+        assertThat(stack.pop(), is(1));
     }
 
 }

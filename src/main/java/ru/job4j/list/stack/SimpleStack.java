@@ -20,7 +20,7 @@ public class SimpleStack<T> {
      * метод удаляет первый элемент в множестве
      * @return старое значение (значение удаленного элемента)
      */
-    public T deleteFirstElement() {
+    public T pop() {
         return linked.deleteFirst();
     }
 
