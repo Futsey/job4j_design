@@ -27,7 +27,7 @@ public class SimpleStack<T> {
     /**
      * метод добавляет элемент в самое начало множества
      */
-    public void pushFirstElement(T value) {
+    public void push(T value) {
         linked.addFirst(value);
     }
 }
