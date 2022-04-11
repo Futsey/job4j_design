@@ -2,6 +2,8 @@ package ru.job4j.queue;
 
 import ru.job4j.list.stack.SimpleStack;
 
+import java.util.NoSuchElementException;
+
 /**
  * Класс является собственной реализацией очереди
  * @see java.util.Queue
@@ -12,33 +14,44 @@ public class SimpleQueue<T> {
     /**
      * все данные содержим в двух контейнерах собственной реализации
      * @see SimpleStack
-     * для переброски данных из одного в другой в соответствии с принципом FIFO
+     * для переброски данных из одного в другой в соответствии с принципом LIFO
      */
     private final SimpleStack<T> in = new SimpleStack<>();
     private final SimpleStack<T> out = new SimpleStack<>();
+    private int inStack;
+    private int outStack;
 
     /**
      * метод передает все данные из одного контейнера в другой
-     * затем удаляет первый элемент в переданной коллекции (последний в передаваемой)
-     * и отдает оставшиеся элементы в изначальной очередности в первый контейнер
+     * инкрементирует счетчик принимающего данные стэка и декрементирует счетчик стэка-донора
+     * превентивно уменьшаем счетчик принимающего стэка, потому как далее из него удаляем первый элемент
      * @return старое значение (значение удаленного элемента)
      */
-    public T pollThanDelete() {
-        T rsl;
-        while (in.hasNext()) {
-            out.pushFirstElement(in.deleteFirstElement());
+
+    public boolean isEmpty() {
+        if (inStack == 0 && outStack == 0) {
+            throw new NoSuchElementException();
         }
-        rsl = out.deleteFirstElement();
-        while (out.hasNext()) {
-            in.pushFirstElement(out.deleteFirstElement());
+        return outStack == 0;
+    }
+
+    public T poll() {
+        if (isEmpty()) {
+            while (inStack > 0) {
+                out.push(in.pop());
+                inStack--;
+                outStack++;
+            }
         }
-        return rsl;
+        outStack--;
+        return out.pop();
     }
 
     /**
-     * метод удаляет последний элемент в контейнере
+     * метод добавляет элемент в самое начало контейнера
      */
-    public void pushToEnd(T value) {
-        in.pushFirstElement(value);
+    public void push(T value) {
+        in.push(value);
+        inStack++;
     }
 }
