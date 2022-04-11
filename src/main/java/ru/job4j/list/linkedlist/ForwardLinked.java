@@ -57,9 +57,11 @@ public class ForwardLinked<T> implements Iterable<T> {
             throw new NoSuchElementException();
         }
         Node<T> firstEl = head;
-        head = firstEl.next;
+        T newEl = head.value;
+        head = head.next;
+        firstEl.value = null;
         firstEl.next = null;
-        return firstEl.value;
+        return newEl;
     }
 
     @Override
@@ -84,26 +86,6 @@ public class ForwardLinked<T> implements Iterable<T> {
         };
     }
 
-    @Override
-    public String toString() {
-        return "ForwardLinked{"
-                + "head=" + head
-                + '}';
-    }
-
-    public static void main(String[] args) {
-        ForwardLinked list = new ForwardLinked();
-        list.add(12);
-        list.add(3);
-        list.add(52);
-        list.add(6);
-        System.out.println(list);
-        list.deleteFirst();
-        System.out.println(list);
-        list.addFirst(11);
-        System.out.println(list);
-    }
-
     private static class Node<T> {
         T value;
         Node<T> next;
@@ -111,14 +93,6 @@ public class ForwardLinked<T> implements Iterable<T> {
         public Node(T value, Node<T> next) {
             this.value = value;
             this.next = next;
-        }
-
-        @Override
-        public String toString() {
-            return "Node{"
-                    + "value=" + value
-                    + ", next=" + next
-                    + '}';
         }
     }
 }
