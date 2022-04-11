@@ -11,13 +11,13 @@ import ru.job4j.list.linkedlist.ForwardLinked;
 public class SimpleStack<T> {
 
     /**
-     * все данные содержим в односвязном списке собственной реализации
+     * Все данные содержим в односвязном списке собственной реализации
      * @see ForwardLinked
      */
     private ForwardLinked<T> linked = new ForwardLinked<T>();
 
     /**
-     * метод удаляет первый элемент в множестве
+     * Метод удаляет первый элемент в множестве
      * @return старое значение (значение удаленного элемента)
      */
     public T pop() {
@@ -25,7 +25,7 @@ public class SimpleStack<T> {
     }
 
     /**
-     * метод добавляет элемент в самое начало множества
+     * Метод добавляет элемент в самое начало множества
      */
     public void push(T value) {
         linked.addFirst(value);
