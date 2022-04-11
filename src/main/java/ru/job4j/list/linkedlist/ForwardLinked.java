@@ -64,6 +64,25 @@ public class ForwardLinked<T> implements Iterable<T> {
         return newEl;
     }
 
+    /**
+     * метод переворачивает односвязный список, индексируя элементы от последнего к первому
+     * @return булево значение
+     */
+    public boolean revert() {
+        if (head != null && head.next != null) {
+            Node<T> currentNode = head.next;
+            head.next = null;
+            while (currentNode != null) {
+                Node<T> nextNode = currentNode.next;
+                currentNode.next = head;
+                head = currentNode;
+                currentNode = nextNode;
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
