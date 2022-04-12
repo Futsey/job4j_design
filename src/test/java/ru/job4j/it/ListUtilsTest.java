@@ -52,11 +52,11 @@ public class ListUtilsTest {
         assertThat(input, is(Arrays.asList(1, 1, 1, 99, 1, 1)));
     }
 
-    /*
     @Test
     public void whenUseRemoveAll() {
         List<Integer> input = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6));
-        ListUtils.removeAll(input, 5);
+        List<Integer> second = new ArrayList<>(Arrays.asList(1, 2, 3));
+        ListUtils.removeAll(input, second);
+        assertThat(input, is(Arrays.asList(4, 5, 6)));
     }
-     */
 }
