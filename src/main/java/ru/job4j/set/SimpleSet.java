@@ -3,6 +3,7 @@ package ru.job4j.set;
 import ru.job4j.list.arraylist.SimpleArrayList;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 
 public class SimpleSet<T> implements Set<T> {
@@ -21,21 +22,20 @@ public class SimpleSet<T> implements Set<T> {
     @Override
     public boolean contains(T value) {
         boolean rsl = false;
-        Iterator<T> i = set.iterator();
-        if (value == null) {
-            while (i.hasNext()) {
-                if (i.next() == value) {
-                    rsl = true;
-                }
-            }
-        } else {
-            while (i.hasNext()) {
-                if (i.next().equals(value)) {
-                    rsl = true;
-                }
+        for (T el : set) {
+            if (Objects.equals(el, value)) {
+                rsl = true;
             }
         }
         return rsl;
+    }
+
+    public T show(T value) {
+        if (contains(value)) {
+            System.out.println(value);
+            return value;
+        }
+        throw new NoSuchElementException();
     }
 
     @Override

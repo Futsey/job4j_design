@@ -1,7 +1,10 @@
 package ru.job4j.set;
 
 import org.junit.Test;
+import ru.job4j.generics.store.Pet;
+
 import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 public class SimpleSetTest {
 
@@ -19,5 +22,16 @@ public class SimpleSetTest {
         assertTrue(set.add(null));
         assertTrue(set.contains(null));
         assertFalse(set.add(null));
+    }
+
+    @Test
+    public void whenDoubleTypePetThanFalse() {
+        Set<Pet> set = new SimpleSet<>();
+        Pet heks = new Pet("1", "Heks");
+        Pet geks = new Pet("2", "Heks");
+        assertTrue(set.add(heks));
+        assertTrue(set.add(geks));
+        assertFalse(set.add(geks));
+        assertFalse(set.add(heks));
     }
 }
