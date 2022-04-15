@@ -15,7 +15,7 @@ public class User {
     }
 
     public static void main(String[] args) {
-        Calendar date = new GregorianCalendar(2002, Calendar.APRIL, 14);
+        Calendar date = new GregorianCalendar(2002, 4, 14, 11, 24, 56);
         User kolya = new User("Nikolay", 2, date);
         User kolyaTwin = new User("Nikolay", 2, date);
 
@@ -25,6 +25,26 @@ public class User {
         System.out.println("User main() kolya:" + map.get(kolya));
         System.out.println("User main() kolyaTwin:" + map.get(kolya));
         System.out.println("User main() map:" + map);
+        System.out.println("User main() mapSize:" + map.size());
+        System.out.println("User main() kolyaHash:" + kolya.hashCode() + " kolyaTwinHash: " + kolyaTwin.hashCode());
+        System.out.println("User main() equals:" + kolya.equals(kolyaTwin));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        User user = (User) o;
+        return children == user.children && Objects.equals(name, user.name) && Objects.equals(birthday, user.birthday);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, children, birthday);
     }
 
     @Override
