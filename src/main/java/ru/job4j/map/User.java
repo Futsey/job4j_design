@@ -19,6 +19,7 @@ public class User {
         User kolya = new User("Nikolay", 2, date);
         User kolyaTwin = new User("Nikolay", 2, date);
 
+        /*
         Map<User, Object> map = new HashMap<>();
         map.put(kolya, new Object());
         map.put(kolyaTwin, new Object());
@@ -28,6 +29,7 @@ public class User {
         System.out.println("User main() mapSize:" + map.size());
         System.out.println("User main() kolyaHash:" + kolya.hashCode() + " kolyaTwinHash: " + kolyaTwin.hashCode());
         System.out.println("User main() equals:" + kolya.equals(kolyaTwin));
+         */
     }
 
     @Override

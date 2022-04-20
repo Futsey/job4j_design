@@ -1,0 +1,71 @@
+package ru.job4j.map;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.*;
+
+public class SimpleMapTest {
+    private SimpleMap<String, String> map = new SimpleMap<>();
+
+    @Before
+    public void init() {
+        map.put("1", "val1");
+        map.put("2", "val2");
+        map.put("3", "val3");
+        map.put("4", "val4");
+        map.put("5", "val5");
+    }
+
+    @Test
+    public void whenSinglePutAndSingleGet() {
+        map.put("6", "val6");
+        assertThat(map.get("6"), is("val6"));
+    }
+
+    @Test
+    public void whenNullPut() {
+        map.put(null, "val6");
+        assertThat(map.get("6"), nullValue());
+    }
+
+    @Test
+    public void whenMultiPutAndMultiGet() {
+        map.put("6", "val6");
+        map.put("7", "val7");
+        map.put("8", "val8");
+        map.put("9", "val9");
+        assertThat(map.get("6"), is("val6"));
+        assertThat(map.get("2"), is("val2"));
+        assertThat(map.get("3"), is("val3"));
+        assertThat(map.get("8"), is("val8"));
+    }
+
+    @Test
+    public void whenRemove() {
+        map.remove("2");
+        assertThat(map.get("2"), nullValue());
+    }
+
+    @Test
+    public void whenPutThanRemove() {
+        map.put("6", "val6");
+        assertThat(map.get("6"), is("val6"));
+        map.remove("6");
+        assertThat(map.get("6"), nullValue());
+    }
+
+    @Test
+    public void testHashCodeFalse() {
+        long a = map.hashCode("6");
+        long b = map.hashCode("5");
+        assertNotEquals(a, b);
+    }
+
+    @Test
+    public void testHashCodeTrue() {
+        assertEquals(map.hashCode("6"), map.hashCode("6"));
+    }
+}
