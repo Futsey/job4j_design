@@ -112,17 +112,16 @@ public class SimpleMap<K, V> implements Map<K, V> {
      * Метод вычисляет хэшкод элемента
      */
     public int hashCode(String key) {
+        int rsl = key.charAt(0);
         if (key == null) {
-           return 0;
+            rsl = key.charAt(0);
         } else {
             char[] chars = key.toCharArray();
-            return 31 * switch (chars.length) {
-                case 1 -> key.charAt(0);
-                case 2 -> key.charAt(0) + key.charAt(1);
-                case 3 -> key.charAt(0) + key.charAt(1) + key.charAt(2);
-                default -> 0;
-            };
+            for (int i = 0; i < chars.length; i++) {
+                 rsl = key.charAt(i++);
+            }
         }
+        return 31 * rsl;
     }
 
     /**
