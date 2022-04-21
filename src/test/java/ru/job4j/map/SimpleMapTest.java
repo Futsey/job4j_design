@@ -33,14 +33,10 @@ public class SimpleMapTest {
 
     @Test
     public void whenMultiPutAndMultiGet() {
-        map.put("6", "val6");
-        map.put("7", "val7");
-        map.put("8", "val8");
-        map.put("9", "val9");
-        assertThat(map.get("6"), is("val6"));
         assertThat(map.get("2"), is("val2"));
         assertThat(map.get("3"), is("val3"));
-        assertThat(map.get("8"), is("val8"));
+        assertThat(map.get("4"), is("val4"));
+        assertThat(map.get("5"), is("val5"));
     }
 
     @Test
@@ -59,13 +55,13 @@ public class SimpleMapTest {
 
     @Test
     public void testHashCodeFalse() {
-        long a = map.hashCode("6");
-        long b = map.hashCode("5");
+        long a = map.get("2").hashCode();
+        long b = map.get("3").hashCode();
         assertNotEquals(a, b);
     }
 
     @Test
     public void testHashCodeTrue() {
-        assertEquals(map.hashCode("6"), map.hashCode("6"));
+        assertEquals(map.get("5").hashCode(), map.get("5").hashCode());
     }
 }
