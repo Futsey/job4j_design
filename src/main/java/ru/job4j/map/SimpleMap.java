@@ -99,6 +99,9 @@ public class SimpleMap<K, V> implements Map<K, V> {
 
             @Override
             public boolean hasNext() {
+                if (modCount != count) {
+                    throw new ConcurrentModificationException();
+                }
                 while (point < capacity && table[point] == null) {
                     point++;
                 }
