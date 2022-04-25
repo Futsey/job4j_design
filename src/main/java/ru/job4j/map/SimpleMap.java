@@ -31,7 +31,6 @@ public class SimpleMap<K, V> implements Map<K, V> {
      * и добавляет новые элемент в первую пустую ячейку
      * @return true\false (элемент добавлен\не добавлен)
      */
-
     @Override
     public boolean put(K key, V value) {
         boolean rsl = false;
@@ -48,14 +47,28 @@ public class SimpleMap<K, V> implements Map<K, V> {
         return rsl;
     }
 
+    /**
+     * Хэш-функция
+     * @param hashCode
+     * @return true\false
+     */
     private int hash(int hashCode) {
         return (hashCode == 0) ? 0 : (hashCode ^ (hashCode >>> 16));
     }
 
+    /**
+     * Метод вычисляет номер ячейки, где будет расположен или уже расположен искомый элемент
+     * @param hash
+     * @return индекс ячейки массива
+     */
     private int indexFor(int hash) {
         return (capacity - 1) & hash;
     }
 
+    /**
+     * Метод удваивает вместимость массива
+     * @return новый массив увеличенного размера со всеми элементами из старого массива
+     */
     private void expand() {
         capacity *= 2;
         MapEntry<K, V>[] table = new MapEntry[capacity];
@@ -68,6 +81,11 @@ public class SimpleMap<K, V> implements Map<K, V> {
         this.table = table;
     }
 
+    /**
+     * Метод возвращает значение элемента по ключу
+     * @param key
+     * @return значение элемента
+     */
     @Override
     public V get(K key) {
         V rsl = null;
@@ -78,6 +96,11 @@ public class SimpleMap<K, V> implements Map<K, V> {
         return rsl;
     }
 
+    /**
+     * Метод находит  и зануляет ключ элемента
+     * @param key
+     * @return true\false (операция успешна\не успешна)
+     */
     @Override
     public boolean remove(K key) {
         boolean rsl = false;
