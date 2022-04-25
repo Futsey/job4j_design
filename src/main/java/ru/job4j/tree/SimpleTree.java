@@ -3,6 +3,7 @@ package ru.job4j.tree;
 import java.util.LinkedList;
 import java.util.Optional;
 import java.util.Queue;
+import java.util.function.Predicate;
 
 /**
  * Класс является собственной реализацией
@@ -39,20 +40,39 @@ public class SimpleTree<E> implements Tree<E> {
     /**
      * Метод принимает значение
      * @param value
-     * Создает связный список на основе очереди, куда после проверки перекладывает все элементы
-     * и сравнивает их на предмет соответствия с value
-     * Для безопасного доступа к элементу используем обертку от NPE
-     * @see Optional
-     * @return искомое значение или пустой Optional
+     * передает для утверждения функцию сравнения значения со значением в дереве
+     * @return true\false (нашел\не нашел)
      */
     @Override
     public Optional<Node<E>> findBy(E value) {
+        Predicate<Node<E>> pred = el -> el.value.equals(value);
+        return findByPredicate(pred);
+    }
+
+    /**
+     * Метод передает для утверждения функцию сравнения количества связанных нодов с корнем дерева
+     * @return true\false (больше\ пусто Optional)
+     */
+    public boolean isBinary() {
+        Predicate<Node<E>> pred = i -> i.children.size() > 2;
+        return findByPredicate(pred).isEmpty();
+    }
+
+    /**
+     * Метод принимает значение
+     * @param condition
+     * производит проверку по переданному условию и возвращает булево значение
+     * Для безопасного доступа к элементу используем обертку от NPE
+     * @see Optional
+     * @return true\false (проверка пройдена\не пройдена)
+     */
+    private Optional<Node<E>> findByPredicate(Predicate<Node<E>> condition) {
         Optional<Node<E>> rsl = Optional.empty();
         Queue<Node<E>> data = new LinkedList<>();
         data.offer(this.root);
         while (!data.isEmpty()) {
             Node<E> el = data.poll();
-            if (el.value.equals(value)) {
+            if (condition.test(el)) {
                 rsl = Optional.of(el);
                 break;
             }
