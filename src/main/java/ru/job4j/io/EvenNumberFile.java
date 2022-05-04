@@ -1,6 +1,7 @@
 package ru.job4j.io;
 
 import java.io.FileInputStream;
+import java.io.IOException;
 
 public class EvenNumberFile {
 
@@ -9,12 +10,17 @@ public class EvenNumberFile {
             StringBuilder text = new StringBuilder();
             int read;
             while ((read = in.read()) != -1) {
-                if (read % 2 == 0) {
                     text.append((char) read);
+            }
+            String[] data = text.toString().split(System.lineSeparator());
+            for (String el : data) {
+                int number = Integer.parseInt(el);
+                System.out.println((number % 2 == 0) ? el + " even" : el + " odd");
+                if (number % 2 == 0) {
+                    System.out.println("Just even: " + el);
                 }
             }
-            System.out.println(text);
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
