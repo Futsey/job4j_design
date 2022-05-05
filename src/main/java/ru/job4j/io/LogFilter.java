@@ -18,7 +18,8 @@ public class LogFilter {
             "0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:49 +0300] \"GET /tomcat.css HTTP/1.1\" 200 5931",
             "0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:49 +0300] \"GET /bg-nav.png HTTP/1.1\" 200 1404",
             "0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:49 +0300] \"GET /bg-button.png HTTP/1.1\" 200 713",
-            "0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:49 +0300] \"GET /bg-middle.png HTTP/1.1\" 200 4048"
+            "0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:49 +0300] \"GET /bg-middle.png HTTP/1.1\" 200 4048",
+            "0:0:0:0:0:0:0:1 - - [19/Feb/2020:15:21:18 +0300] \"GET /items/ajax.html HTTP/1.1\" 405 1113"
     };
 
     public void writeData(String[] text) {
@@ -35,7 +36,7 @@ public class LogFilter {
 
     public void readData(String file) {
         try (BufferedReader in = new BufferedReader(new FileReader(file))) {
-            System.out.println("Start reading: log.txt");
+            System.out.println("Start reading: " + file);
             in.lines().forEach(System.out::println);
             System.out.println("File read done!");
         } catch (Exception e) {
@@ -53,12 +54,11 @@ public class LogFilter {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     public static List<String> filter(String file) {
         List<String> data = new ArrayList<>();
-        String patternStr = "\"\\s[40]";
+        String patternStr = "\"\\s404";
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             Pattern pattern = Pattern.compile(patternStr);
             Matcher matcher = pattern.matcher(patternStr);
