@@ -42,7 +42,7 @@ public class LogFilter {
             e.printStackTrace();
         }
     }
-//
+
     public List<String> filter(String file) {
         List<String> data = new ArrayList<>();
         String patternStr = "\"\\s[40]";
