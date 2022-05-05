@@ -43,7 +43,20 @@ public class LogFilter {
         }
     }
 
-    public List<String> filter(String file) {
+    public static void save(List<String> log, String file) {
+        try (BufferedWriter out = new BufferedWriter(new FileWriter(file))) {
+            for (String el : log) {
+                out.write(el);
+                out.write(System.lineSeparator());
+            }
+            System.out.println("Sorted file record done!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static List<String> filter(String file) {
         List<String> data = new ArrayList<>();
         String patternStr = "\"\\s[40]";
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
@@ -68,7 +81,8 @@ public class LogFilter {
         logFilter.writeData(logFilter.text);
         logFilter.readData("log.txt");
         System.out.println("____________________________");
-        List<String> log = logFilter.filter("log.txt");
+        List<String> log = filter("log.txt");
         System.out.println("____________________________");
+        save(log, "404.txt");
     }
 }
