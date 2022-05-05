@@ -45,13 +45,13 @@ public class LogFilter {
     }
 
     public static void save(List<String> log, String file) {
-        try (BufferedWriter out = new BufferedWriter(new FileWriter(file))) {
+        try (PrintWriter out = new PrintWriter(new BufferedOutputStream(new FileOutputStream(file)))) {
             for (String el : log) {
                 out.write(el);
                 out.write(System.lineSeparator());
             }
             System.out.println("Sorted file record done!");
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
