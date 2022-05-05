@@ -48,7 +48,6 @@ public class LogFilter {
         try (PrintWriter out = new PrintWriter(new BufferedOutputStream(new FileOutputStream(file)))) {
             for (String el : log) {
                 out.write(el);
-                out.write(System.lineSeparator());
             }
             System.out.println("Sorted file record done!");
         } catch (IOException e) {
