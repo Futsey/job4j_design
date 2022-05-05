@@ -3,10 +3,8 @@ package ru.job4j.io;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 public class LogFilter {
 
@@ -47,7 +45,7 @@ public class LogFilter {
 //
     public List<String> filter(String file) {
         List<String> data = new ArrayList<>();
-        String patternStr = "\"\s[404]";
+        String patternStr = "\"\\s[40]";
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             Pattern pattern = Pattern.compile(patternStr);
             Matcher matcher = pattern.matcher(patternStr);
