@@ -13,6 +13,7 @@ public class ConfigTest {
         String path = "./data/pair_without_comment.properties";
         Config config = new Config(path);
         config.load();
+        assertThat(config.value("hibernate.dialect"), is("org.hibernate.dialect.PostgreSQLDialect"));
         assertThat(config.value("surname"), is(Matchers.nullValue()));
     }
 
@@ -22,6 +23,14 @@ public class ConfigTest {
         Config config = new Config(path);
         config.load();
         assertThat(config.value("hibernate.dialect"), is("org.hibernate.dialect.PostgreSQLDialect"));
-        assertThat(config.value("surname"), is(Matchers.nullValue()));
+        assertThat(config.value("#hibernate.dialect"), is(Matchers.nullValue()));
+    }
+
+    @Test
+    public void whenPairWithWhitespaces() {
+        String path = "./data/pair_with_comment.properties";
+        Config config = new Config(path);
+        config.load();
+        assertThat(config.value("hibernate.dialect"), is("org.hibernate.dialect.PostgreSQLDialect"));
     }
 }

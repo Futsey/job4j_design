@@ -16,42 +16,27 @@ public class Config {
         this.path = path;
     }
 
-    private boolean checkComment() {
-        boolean rsl = false;
-        try (FileInputStream in = new FileInputStream(this.path)) {
-            String startsWith = "#";
-            Pattern pattern = Pattern.compile(startsWith);
-            Matcher matcherStart = pattern.matcher(startsWith);
-            int read;
-            while ((read = in.read()) != -1) {
-                if (matcherStart.find()) {
-                    rsl = true;
-                    break;
+    public void load() {
+        try (BufferedReader reader = new BufferedReader(new FileReader(this.path))) {
+            String split = "=";
+            String comment = "#";
+            String whiteLines = " ";
+            Pattern pattern = Pattern.compile(split);
+            Matcher matcherSplit = pattern.matcher(split);
+            Matcher matcherComment = pattern.matcher(comment);
+            Matcher matcherWhiteLines = pattern.matcher(whiteLines);
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] array = line.split(split);
+                matcherSplit.reset(line);
+                if (matcherSplit.find()) {
+                    values.put(array[0], array[1]);
+                } else if (matcherComment.find() || matcherWhiteLines.find()) {
+                    return;
                 }
             }
         } catch (IOException e) {
-        e.printStackTrace();
-    }
-        return rsl;
-    }
-
-    public void load() {
-        if (checkComment()) {
-            try (BufferedReader reader = new BufferedReader(new FileReader(this.path))) {
-                String split = "=";
-                Pattern pattern = Pattern.compile(split);
-                Matcher matcherSplit = pattern.matcher(split);
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    String[] array = line.split(split);
-                    matcherSplit.reset(line);
-                    if (matcherSplit.find()) {
-                        values.put(array[0], array[1]);
-                    }
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            e.printStackTrace();
         }
     }
 
