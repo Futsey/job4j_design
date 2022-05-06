@@ -47,7 +47,7 @@ public class LogFilter {
     public static void save(List<String> log, String file) {
         try (PrintWriter out = new PrintWriter(new BufferedOutputStream(new FileOutputStream(file)))) {
             for (String el : log) {
-                out.write(el);
+                out.println(el);
             }
             System.out.println("Sorted file record done!");
         } catch (IOException e) {
