@@ -4,8 +4,6 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringJoiner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Config {
 
@@ -18,21 +16,15 @@ public class Config {
 
     public void load() {
         try (BufferedReader reader = new BufferedReader(new FileReader(this.path))) {
-            String split = "=";
-            String comment = "#";
-            String whiteLines = " ";
-            Pattern pattern = Pattern.compile(split);
-            Matcher matcherSplit = pattern.matcher(split);
-            Matcher matcherComment = pattern.matcher(comment);
-            Matcher matcherWhiteLines = pattern.matcher(whiteLines);
             String line;
             while ((line = reader.readLine()) != null) {
-                String[] array = line.split(split);
-                matcherSplit.reset(line);
-                if (matcherSplit.find()) {
-                    values.put(array[0], array[1]);
-                } else if (matcherComment.find() || matcherWhiteLines.find()) {
-                    return;
+                if (!line.startsWith("#") && !line.isEmpty()) {
+                    String[] array = line.split("=");
+                    if (array[0].isEmpty() || array.length < 2) {
+                        throw new IllegalArgumentException();
+                    } else {
+                        values.put(array[0], array[1]);
+                    }
                 }
             }
         } catch (IOException e) {
