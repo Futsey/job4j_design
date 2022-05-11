@@ -19,9 +19,9 @@ public class Config {
             String line;
             while ((line = reader.readLine()) != null) {
                 if (!line.startsWith("#") && !line.isEmpty()) {
-                    String[] array = line.split("=");
-                    if (array[0].isEmpty() || array.length < 2) {
-                        throw new IllegalArgumentException();
+                    String[] array = line.split("=", 2);
+                    if (array[0].isEmpty() || array[1].isEmpty() || array.length < 2) {
+                        throw new IllegalArgumentException("One or both elements of the line are empty");
                     } else {
                         values.put(array[0], array[1]);
                     }
@@ -49,5 +49,6 @@ public class Config {
 
     public static void main(String[] args) {
         System.out.println(new Config("app.properties"));
+        System.out.println(new Config("./data/pair_with_Illegal.properties"));
     }
 }
