@@ -38,10 +38,10 @@ public class ConfigTest {
     }
 
     @Rule
-    public ExpectedException thrown= ExpectedException.none();
+    public ExpectedException thrown = ExpectedException.none();
     @Test
-    public void whenPairWithIllegal(){
-        thrown.expect( Exception.class );
+    public void whenPairWithIllegal() {
+        thrown.expect(Exception.class);
         String path = "./data/pair_with_Illegal.properties";
         Config config = new Config(path);
         config.load();
