@@ -7,7 +7,13 @@ public class Analizy {
     List<String> data = new ArrayList<>();
 
     public boolean inactiveStatus(String[] array) {
-        return array[0].equals("400") || array[0].equals("500");
+        boolean rsl = false;
+        if (array[0].equals("400") || array[0].equals("500")) {
+            rsl = true;
+        } else if (array[0].equals("200") || array[0].equals("300")) {
+            rsl = false;
+        }
+        return rsl;
     }
 
     public static void save(List<String> data, String target) {
