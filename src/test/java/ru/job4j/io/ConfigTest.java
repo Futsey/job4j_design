@@ -15,7 +15,7 @@ public class ConfigTest {
     public ExpectedException thrown = ExpectedException.none();
     @Test
     public void whenPairWithIllegal() {
-        thrown.expect(Exception.class);
+        thrown.expect(IllegalArgumentException.class);
         String path = "./data/pair_with_Illegal.properties";
         Config config = new Config(path);
         config.load();
@@ -23,7 +23,7 @@ public class ConfigTest {
 
     @Test
     public void whenPairWithoutSplitSymbol() {
-        thrown.expect(Exception.class);
+        thrown.expect(IllegalArgumentException.class);
         String path = "./data/pair_without_split.properties";
         Config config = new Config(path);
         config.load();
@@ -31,7 +31,7 @@ public class ConfigTest {
 
     @Test
     public void whenPairWithoutValues() {
-        thrown.expect(Exception.class);
+        thrown.expect(IllegalArgumentException.class);
         String path = "./data/pair_without_values.properties";
         Config config = new Config(path);
         config.load();
