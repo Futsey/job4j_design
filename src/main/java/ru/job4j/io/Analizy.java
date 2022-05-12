@@ -37,11 +37,11 @@ public class Analizy {
                     if (inactiveStatus(array) && count != 1) {
                         data.add(array[1]);
                         count++;
-                        System.out.println("Server is inactive: " + line);
+                        System.out.print(array[1] + ";");
                     } else if (!inactiveStatus(array) && count > 0) {
                         data.add(array[1]);
                         count = 0;
-                        System.out.println("Server is active: " + line);
+                        System.out.println(array[1] + ";");
                     }
                 }
             }
