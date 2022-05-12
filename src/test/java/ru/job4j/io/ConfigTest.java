@@ -11,6 +11,40 @@ import static org.junit.Assert.*;
 
 public class ConfigTest {
 
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+    @Test
+    public void whenPairWithIllegal() {
+        thrown.expect(Exception.class);
+        String path = "./data/pair_with_Illegal.properties";
+        Config config = new Config(path);
+        config.load();
+    }
+
+    @Test
+    public void whenPairWithoutSplitSymbol() {
+        thrown.expect(Exception.class);
+        String path = "./data/pair_without_split.properties";
+        Config config = new Config(path);
+        config.load();
+    }
+
+    @Test
+    public void whenPairWithoutValues() {
+        thrown.expect(Exception.class);
+        String path = "./data/pair_without_values.properties";
+        Config config = new Config(path);
+        config.load();
+    }
+
+    @Test
+    public void whenPairMultiSplitSymbol() {
+        String path = "./data/pair_multi_split.properties";
+        Config config = new Config(path);
+        config.load();
+        assertThat(config.value("hibernate.dialect"), is("org.=hibernate.dialect.=PostgreSQLDialect"));
+    }
+
     @Test
     public void whenPairWithoutComment() {
         String path = "./data/pair_without_comment.properties";
@@ -25,7 +59,6 @@ public class ConfigTest {
         Config config = new Config(path);
         config.load();
         assertThat(config.value("hibernate.dialect"), is("org.hibernate.dialect.PostgreSQLDialect"));
-        assertThat(config.value("#hibernate.dialect"), is(Matchers.nullValue()));
     }
 
     @Test
@@ -44,13 +77,7 @@ public class ConfigTest {
         assertThat(config.value("hibernate.dialect"), is("org.hibernate.dialect.PostgreSQLDialect"));
     }
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
-    @Test
-    public void whenPairWithIllegal() {
-        thrown.expect(Exception.class);
-        String path = "./data/pair_with_Illegal.properties";
-        Config config = new Config(path);
-        config.load();
-    }
+
+
+
 }

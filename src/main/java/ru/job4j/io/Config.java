@@ -20,7 +20,7 @@ public class Config {
             while ((line = reader.readLine()) != null) {
                 if (!line.startsWith("#") && !line.isEmpty()) {
                     String[] array = line.split("=", 2);
-                    if (array[0].isEmpty() || array[1].isEmpty() || array.length < 2) {
+                    if (array.length < 2 || array[0].isEmpty() || array[1].isEmpty()) {
                         throw new IllegalArgumentException("One or both elements of the line are empty");
                     } else {
                         values.put(array[0], array[1]);
