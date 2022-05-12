@@ -15,10 +15,10 @@ public class Analizy {
             int count = 0;
             for (String el : data) {
                 if (count < 1) {
-                    out.print("The server was unavailable " + el + " to ");
+                    out.print(el + ";");
                     count++;
                 } else {
-                    out.println(el + "; ");
+                    out.println(el + ";");
                     count = 0;
                 }
             }
