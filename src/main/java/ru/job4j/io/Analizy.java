@@ -8,9 +8,9 @@ public class Analizy {
 
     public boolean inactiveStatus(String[] array) {
         boolean rsl = false;
-        if (array[0].equals("400") || array[0].equals("500")) {
+        if ("400".equals(array[0]) || "500".equals(array[0])) {
             rsl = true;
-        } else if (array[0].equals("200") || array[0].equals("300")) {
+        } else if ("200".equals(array[0]) || "300".equals(array[0])) {
             rsl = false;
         }
         return rsl;

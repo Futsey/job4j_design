@@ -52,4 +52,20 @@ public class AnalizyTest {
         }
         assertThat(rsl.toString(), is(""));
     }
+
+    @Test
+    public void wrongValue() throws IOException {
+        File source = folder.newFile("source.txt");
+        File target = folder.newFile("target.txt");
+        Analizy analizy = new Analizy();
+        try (PrintWriter out = new PrintWriter(source)) {
+            out.println("2000 10:56:01");
+        }
+        analizy.unavailable(source.getAbsolutePath(), target.getAbsolutePath());
+        StringBuilder rsl = new StringBuilder();
+        try (BufferedReader in = new BufferedReader(new FileReader(target))) {
+            in.lines().forEach(rsl::append);
+        }
+        assertThat(rsl.toString(), is(""));
+    }
 }
