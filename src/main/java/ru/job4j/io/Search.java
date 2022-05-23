@@ -12,8 +12,9 @@ public class Search {
 
     public static void main(String[] args) throws IOException {
         Path start = Paths.get(args[0]);
-        check(args, String.valueOf(start));
-        search(start, p -> p.toFile().getName().endsWith(args[1])).forEach(System.out::println);
+        if (check(args, String.valueOf(start))) {
+            search(start, p -> p.toFile().getName().endsWith(args[1])).forEach(System.out::println);
+        }
     }
 
     public static List<Path> search(Path root, Predicate<Path> condition) throws IOException {
@@ -22,16 +23,22 @@ public class Search {
         return searcher.getPaths();
     }
 
-    public static void check(String[] args, String path) {
+    public static boolean check(String[] args, String path) {
+        boolean rsl = false;
         File file = new File(path);
         if (args.length == 2) {
             for (String el : args) {
-                if (!el.startsWith(".") && file.isDirectory()) {
+                if (file.isDirectory()) {
+                    if (el.startsWith(".")) {
+                        rsl = true;
+                    }
+                } else {
                     throw new IllegalArgumentException("Argument is not a directory " + el);
                 }
             }
         } else {
             throw new IllegalArgumentException("Not enough arguments");
         }
+        return rsl;
     }
 }
