@@ -1,5 +1,6 @@
 package ru.job4j.io;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -10,8 +11,8 @@ import java.util.function.Predicate;
 public class Search {
 
     public static void main(String[] args) throws IOException {
-        check(args);
         Path start = Paths.get(args[0]);
+        check(args, String.valueOf(start));
         search(start, p -> p.toFile().getName().endsWith(args[1])).forEach(System.out::println);
     }
 
@@ -21,13 +22,16 @@ public class Search {
         return searcher.getPaths();
     }
 
-    public static void check(String[] args) {
-        for (String el : args) {
-            if (!el.startsWith(".")) {
-                throw new IllegalArgumentException("Argument is not a directory " + el);
-            } else if (!((el.length() - el.lastIndexOf(".") <= 3))) {
-                throw new IllegalArgumentException("Wrong expansion " + el);
+    public static void check(String[] args, String path) {
+        File file = new File(path);
+        if (args.length == 2) {
+            for (String el : args) {
+                if (!el.startsWith(".") && file.isDirectory()) {
+                    throw new IllegalArgumentException("Argument is not a directory " + el);
+                }
             }
+        } else {
+            throw new IllegalArgumentException("Not enough arguments!");
         }
     }
 }
