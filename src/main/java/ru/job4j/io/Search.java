@@ -31,7 +31,7 @@ public class Search {
                 }
             }
         } else {
-            throw new IllegalArgumentException("Not enough arguments!");
+            throw new IllegalArgumentException("Not enough arguments");
         }
     }
 }
