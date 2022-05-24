@@ -11,10 +11,10 @@ import java.util.function.Predicate;
 public class Search {
 
     public static void main(String[] args) throws IOException {
-        Path start = Paths.get(args[0]);
-        if (args.length == 2) {
+        if (args.length != 2) {
             throw new IllegalArgumentException("Not enough arguments");
         }
+        Path start = Paths.get(args[0]);
         check(args);
         search(start, p -> p.toFile().getName().endsWith(args[1])).forEach(System.out::println);
     }
@@ -28,11 +28,11 @@ public class Search {
     public static void check(String[] args) {
         File path = new File(args[0]);
         String charToSearch = args[1];
-            if (!path.isDirectory()) {
-                throw new IllegalArgumentException("Argument is not a directory " + "\"" + path + "\"");
-            }
             if (!charToSearch.startsWith(".")) {
                 throw new IllegalArgumentException("Illegal file extension " + "\"" + charToSearch + "\"");
+            }
+            if (!path.isDirectory()) {
+                throw new IllegalArgumentException("Argument is not a directory " + "\"" + path + "\"");
             }
     }
 }
