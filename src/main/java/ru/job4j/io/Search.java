@@ -13,9 +13,10 @@ public class Search {
     public static void main(String[] args) throws IOException {
         Path start = Paths.get(args[0]);
         if (args.length == 2) {
-            check(args);
-            search(start, p -> p.toFile().getName().endsWith(args[1])).forEach(System.out::println);
+            throw new IllegalArgumentException("Not enough arguments");
         }
+        check(args);
+        search(start, p -> p.toFile().getName().endsWith(args[1])).forEach(System.out::println);
     }
 
     public static List<Path> search(Path root, Predicate<Path> condition) throws IOException {
@@ -29,7 +30,8 @@ public class Search {
         String charToSearch = args[1];
             if (!path.isDirectory()) {
                 throw new IllegalArgumentException("Argument is not a directory " + "\"" + path + "\"");
-            } else if (!charToSearch.startsWith(".")) {
+            }
+            if (!charToSearch.startsWith(".")) {
                 throw new IllegalArgumentException("Illegal file extension " + "\"" + charToSearch + "\"");
             }
     }
