@@ -23,8 +23,8 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
     }
 
     public void printDublicate() {
-        for (FileProperty fp : allFiles.keySet()) {
-                allFiles.get(fp).forEach(System.out::println);
+        for (FileProperty fileProperty : allFiles.keySet()) {
+                allFiles.get(fileProperty).forEach(System.out::println);
         }
     }
 }
