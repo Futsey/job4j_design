@@ -12,7 +12,8 @@ public class Search {
 
     public static void main(String[] args) throws IOException {
         Path start = Paths.get(args[0]);
-        if (check(args, String.valueOf(start))) {
+        if (args.length == 2) {
+            check(args);
             search(start, p -> p.toFile().getName().endsWith(args[1])).forEach(System.out::println);
         }
     }
@@ -23,22 +24,13 @@ public class Search {
         return searcher.getPaths();
     }
 
-    public static boolean check(String[] args, String path) {
-        boolean rsl = false;
-        File file = new File(path);
-        if (args.length == 2) {
-            for (String el : args) {
-                if (file.isDirectory()) {
-                    if (el.startsWith(".")) {
-                        rsl = true;
-                    }
-                } else {
-                    throw new IllegalArgumentException("Argument is not a directory " + el);
-                }
+    public static void check(String[] args) {
+        File path = new File(args[0]);
+        String charToSearch = args[1];
+            if (!path.isDirectory()) {
+                throw new IllegalArgumentException("Argument is not a directory " + "\"" + path + "\"");
+            } else if (!charToSearch.startsWith(".")) {
+                throw new IllegalArgumentException("Illegal file extension " + "\"" + charToSearch + "\"");
             }
-        } else {
-            throw new IllegalArgumentException("Not enough arguments");
-        }
-        return rsl;
     }
 }
