@@ -6,7 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ArgsName {
-
+/*
     private final Map<String, String> values = new HashMap<>();
 
     public String get(String key) {
@@ -44,4 +44,5 @@ public class ArgsName {
         ArgsName zip = ArgsName.of(new String[] {"-out=project.zip", "-encoding=UTF-8"});
         System.out.println(zip.get("out"));
     }
+ */
 }
