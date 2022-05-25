@@ -1,5 +1,6 @@
 package ru.job4j.io;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -29,26 +30,27 @@ public class ArgsName {
         if (args[1].isEmpty()) {
             throw new IllegalArgumentException("Value is empty");
         }
+        if (!args[0].startsWith("-")) {
+            throw new IllegalArgumentException("Missing \"-\" in key");
+        }
     }
 
     private void parse(String[] args) {
-        if (args.length == 0) {
-            throw new IllegalArgumentException("You have no arguments loaded");
-        }
-        String patternStr = "=";
-        Pattern pattern = Pattern.compile(patternStr);
-        Matcher matcher = pattern.matcher(patternStr);
             for (String el : args) {
-                matcher.reset(el);
-                if (matcher.find()) {
-                    String[] temp = el.replaceFirst("-", "").split(patternStr, 2);
+                if (el.contains("=")) {
+                    String[] temp = el.split("=", 2);
                     check(temp);
-                    values.put(temp[0], temp[1]);
+                    values.put(temp[0].replaceFirst("-", ""), temp[1]);
+                } else {
+                    throw new IllegalArgumentException("Missing \"=\" in file");
                 }
             }
     }
 
     public static ArgsName of(String[] args) {
+        if (args.length == 0) {
+            throw new IllegalArgumentException("You have no arguments loaded");
+        }
         ArgsName names = new ArgsName();
         names.parse(args);
         return names;
