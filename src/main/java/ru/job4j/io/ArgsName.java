@@ -16,7 +16,25 @@ public class ArgsName {
         return values.get(key);
     }
 
+    private void check(String[] args) {
+        if (args.length == 0) {
+            throw new IllegalArgumentException("Key and value is absent");
+        }
+        if (args.length == 1) {
+            throw new IllegalArgumentException("Value is absent");
+        }
+        if (args[0].isEmpty()) {
+            throw new IllegalArgumentException("Key is empty");
+        }
+        if (args[1].isEmpty()) {
+            throw new IllegalArgumentException("Value is empty");
+        }
+    }
+
     private void parse(String[] args) {
+        if (args.length == 0) {
+            throw new IllegalArgumentException("You have no arguments loaded");
+        }
         String patternStr = "=";
         Pattern pattern = Pattern.compile(patternStr);
         Matcher matcher = pattern.matcher(patternStr);
@@ -24,17 +42,8 @@ public class ArgsName {
                 matcher.reset(el);
                 if (matcher.find()) {
                     String[] tmp = el.replaceFirst("-", "").split(patternStr, 2);
-                    if (tmp.length == 0) {
-                        throw new IllegalArgumentException("Key and value is absent");
-                    } else if (tmp.length == 1) {
-                        throw new IllegalArgumentException("Value is absent");
-                    } else if (tmp[0].isEmpty()) {
-                        throw new IllegalArgumentException("Key is empty");
-                    } else if (tmp[1].isEmpty()) {
-                        throw new IllegalArgumentException("Value is empty");
-                    } else {
-                        values.put(tmp[0], tmp[1]);
-                    }
+                    check(tmp);
+                    values.put(tmp[0], tmp[1]);
                 }
             }
     }
