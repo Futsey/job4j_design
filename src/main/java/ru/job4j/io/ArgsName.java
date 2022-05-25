@@ -41,9 +41,9 @@ public class ArgsName {
             for (String el : args) {
                 matcher.reset(el);
                 if (matcher.find()) {
-                    String[] tmp = el.replaceFirst("-", "").split(patternStr, 2);
-                    check(tmp);
-                    values.put(tmp[0], tmp[1]);
+                    String[] temp = el.replaceFirst("-", "").split(patternStr, 2);
+                    check(temp);
+                    values.put(temp[0], temp[1]);
                 }
             }
     }
