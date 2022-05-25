@@ -31,7 +31,7 @@ public class Search {
             if (!charToSearch.startsWith(".")) {
                 throw new IllegalArgumentException("Illegal file extension " + "\"" + charToSearch + "\"");
             }
-            if (!path.isDirectory()) {
+            if (path.isAbsolute() && !path.isDirectory()) {
                 throw new IllegalArgumentException("Argument is not a directory " + "\"" + path + "\"");
             }
     }
