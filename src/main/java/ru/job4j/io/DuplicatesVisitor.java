@@ -20,9 +20,9 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
     }
 
     public void printDublicate() {
-        for (FileProperty fp : allFiles.keySet()) {
-            if (allFiles.get(fp).size() > 1) {
-                allFiles.get(fp).forEach(System.out::println);
+        for (Map.Entry<FileProperty, List<Path>> entry : allFiles.entrySet()) {
+            if (entry.getValue().size() > 1) {
+                System.out.println(entry);
             }
         }
     }
