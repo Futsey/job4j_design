@@ -8,7 +8,7 @@ public class DuplicatesFinder {
 
     public static void main(String[] args) throws IOException {
         DuplicatesVisitor duplicatesVisitor = new DuplicatesVisitor();
-        Files.walkFileTree(Path.of("F:\\Java"), duplicatesVisitor);
+        Files.walkFileTree(Path.of("C:\\Test"), duplicatesVisitor);
         duplicatesVisitor.printDublicate();
     }
 }
