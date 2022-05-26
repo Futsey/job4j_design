@@ -9,7 +9,7 @@ import java.util.*;
 
 public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
 
-    static Map<FileProperty, List<Path>> allFiles = new HashMap<>();
+    Map<FileProperty, List<Path>> allFiles = new HashMap<>();
 
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
@@ -22,7 +22,7 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
     public void printDublicate() {
         for (List<Path> el : allFiles.values()) {
             if (el.size() > 1) {
-                System.out.println(el);
+                el.forEach(System.out::println);
             }
         }
     }
