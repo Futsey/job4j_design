@@ -1,10 +1,7 @@
 package ru.job4j.io;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class ArgsName {
 
@@ -17,33 +14,28 @@ public class ArgsName {
         return values.get(key);
     }
 
-    private void check(String[] args) {
-        if (args.length == 0) {
-            throw new IllegalArgumentException("Key and value is absent");
+    private void check(String arg) {
+        if (!arg.startsWith("-")) {
+            throw new IllegalArgumentException("Missing \"-\" in argument");
         }
-        if (args.length == 1) {
-            throw new IllegalArgumentException("Value is absent");
-        }
-        if (args[0].isEmpty()) {
-            throw new IllegalArgumentException("Key is empty");
-        }
-        if (args[1].isEmpty()) {
-            throw new IllegalArgumentException("Value is empty");
-        }
-        if (!args[0].startsWith("-")) {
-            throw new IllegalArgumentException("Missing \"-\" in key");
+        if (!arg.contains("=")) {
+            throw new IllegalArgumentException("Missing \"=\" in argument");
         }
     }
 
     private void parse(String[] args) {
+        int count = 0;
             for (String el : args) {
-                if (el.contains("=")) {
-                    String[] temp = el.split("=", 2);
-                    check(temp);
-                    values.put(temp[0].replaceFirst("-", ""), temp[1]);
-                } else {
-                    throw new IllegalArgumentException("Missing \"=\" in file");
+                String line = args[count++];
+                check(line);
+                String[] temp = el.split("=", 2);
+                if (temp[0].isEmpty()) {
+                    throw new IllegalArgumentException("Key is empty");
                 }
+                if (temp[1].isEmpty()) {
+                    throw new IllegalArgumentException("Value is empty");
+                }
+                values.put(temp[0].replaceFirst("-", ""), temp[1]);
             }
     }
 
@@ -62,5 +54,9 @@ public class ArgsName {
 
         ArgsName zip = ArgsName.of(new String[] {"-out=project.zip", "-encoding=UTF-8"});
         System.out.println(zip.get("out"));
+
+
+        int x = 5_2;
+        System.out.println(x);
     }
 }
