@@ -14,7 +14,7 @@ public class ArgsName {
         return values.get(key);
     }
 
-    private void check(String arg) {
+    private void checkLine(String arg) {
         if (!arg.startsWith("-")) {
             throw new IllegalArgumentException("Missing \"-\" in argument");
         }
@@ -23,18 +23,28 @@ public class ArgsName {
         }
     }
 
+    private void checkSplit(String[] args) {
+        if (args.length == 0) {
+            throw new IllegalArgumentException("Key and value is absent");
+        }
+        if (args.length == 1) {
+            throw new IllegalArgumentException("Value is absent");
+        }
+        if (args[0].isEmpty()) {
+            throw new IllegalArgumentException("Key is empty");
+        }
+        if (args[1].isEmpty()) {
+            throw new IllegalArgumentException("Value is empty");
+        }
+    }
+
     private void parse(String[] args) {
         int count = 0;
             for (String el : args) {
                 String line = args[count++];
-                check(line);
+                checkLine(line);
                 String[] temp = el.split("=", 2);
-                if (temp[0].isEmpty()) {
-                    throw new IllegalArgumentException("Key is empty");
-                }
-                if (temp[1].isEmpty()) {
-                    throw new IllegalArgumentException("Value is empty");
-                }
+                checkSplit(temp);
                 values.put(temp[0].replaceFirst("-", ""), temp[1]);
             }
     }
