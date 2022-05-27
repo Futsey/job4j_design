@@ -35,4 +35,24 @@ public class ArgsNameTest {
     public void whenWrongSomeArgument() {
         ArgsName jvm = ArgsName.of(new String[] {"-enconding=UTF-8", "-Xmx="});
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenLeftEntireLost() {
+        ArgsName jvm = ArgsName.of(new String[] {"-=UTF-8", "-Xmx="});
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenRightEntireLost() {
+        ArgsName jvm = ArgsName.of(new String[] {"-enconding=", "-Xmx="});
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenCharIsMissing() {
+        ArgsName jvm = ArgsName.of(new String[] {"enconding=", "-Xmx="});
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenSplitCharIsMissing() {
+        ArgsName jvm = ArgsName.of(new String[] {"-enconding-UTF-8", "-Xmx="});
+    }
 }
