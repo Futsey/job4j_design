@@ -23,13 +23,7 @@ public class ArgsName {
         }
     }
 
-    private void checkSplit(String[] args) {
-        if (args.length == 0) {
-            throw new IllegalArgumentException("Key and value is absent");
-        }
-        if (args.length == 1) {
-            throw new IllegalArgumentException("Value is absent");
-        }
+    private void checkEntire(String[] args) {
         if (args[0].isEmpty()) {
             throw new IllegalArgumentException("Key is empty");
         }
@@ -39,12 +33,10 @@ public class ArgsName {
     }
 
     private void parse(String[] args) {
-        int count = 0;
             for (String el : args) {
-                String line = args[count++];
-                checkLine(line);
+                checkLine(el);
                 String[] temp = el.split("=", 2);
-                checkSplit(temp);
+                checkEntire(temp);
                 values.put(temp[0].replaceFirst("-", ""), temp[1]);
             }
     }
