@@ -24,11 +24,11 @@ public class Zip {
     /**
      * Метод для архивации директории (всех файлов в директории)
      */
-    public void packFiles(List<File> sources, File target) {
+    public void packFiles(List<Path> sources, File target) {
         try (ZipOutputStream zip = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(target)))) {
-            for (File file: sources) {
-                zip.putNextEntry(new ZipEntry(file.getPath()));
-                try (BufferedInputStream out = new BufferedInputStream(new FileInputStream(file))) {
+            for (Path path: sources) {
+                zip.putNextEntry(new ZipEntry(path.toFile().getPath()));
+                try (BufferedInputStream out = new BufferedInputStream(new FileInputStream(path.toFile()))) {
                     zip.write(out.readAllBytes());
                     zip.closeEntry();
                 }
@@ -60,7 +60,7 @@ public class Zip {
      * -o - output - адрес, куда мы архивируем.
      */
     private static void validate(String[] args) {
-        if (args.length < 2) {
+        if (args.length < 3) {
             throw new IllegalArgumentException("You have no arguments loaded");
         }
         ArgsName argsName = ArgsName.of(args);
@@ -88,11 +88,9 @@ public class Zip {
         validate(args);
         ArgsName argsName = ArgsName.of(args);
         Path startDirectory = Path.of(argsName.get("d"));
-        Predicate<Path> pred = (p) -> p.toFile().getName().endsWith(argsName.get("e"));
+        Predicate<Path> pred = (p) -> !p.toFile().getName().endsWith(argsName.get("e"));
         List<Path> list = Search.search(startDirectory, pred);
         Path target = Path.of(argsName.get("o"));
-        zip.packFiles(list.stream()
-                .map(Path::toFile)
-                .collect(Collectors.toList()), target.toFile());
+        zip.packFiles(list, target.toFile());
     }
 }
