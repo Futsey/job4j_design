@@ -36,7 +36,7 @@ public class ConsoleChat {
     private final String path;
     private final String botAnswers;
     private static List<String> chatList = new LinkedList<>();
-    private static List<String> answerList = new ArrayList<>();;
+    private static List<String> answerList = new ArrayList<>();
 
     public ConsoleChat(String path, String botAnswers) {
         this.path = path;
@@ -48,32 +48,31 @@ public class ConsoleChat {
      */
     public void run() {
         Scanner scanner = new Scanner(System.in);
-        String userMessage = scanner.next();
-        chatList.add(userMessage);
+        String userMessage = null;
         readPhrases();
-        if (STOP.equals(userMessage)) {
-            String stop = "Stop";
-            System.out.println(stop);
-            chatList.add(stop);
-            getContinue();
-            String contin = "Continue";
-            System.out.println(contin);
-            chatList.add(contin);
-            run();
+        while (!OUT.equals(userMessage)) {
+            userMessage = scanner.nextLine();
+            chatList.add(userMessage);
+            if (STOP.equals(userMessage)) {
+                String stop = "Stop";
+                System.out.println(stop);
+                chatList.add(stop);
+                getContinue();
+                String contin = "Continue";
+                System.out.println(contin);
+                chatList.add(contin);
+            }
+            if (!STOP.equals(userMessage) && !OUT.equals(userMessage) && !CONTINUE.equals(userMessage)) {
+                String botTalks = answerList.get(randomBotLine(answerList));
+                System.out.println(botTalks);
+                chatList.add(botTalks);
+            }
         }
-        if (OUT.equals(userMessage)) {
-            String out = "I`ll be back";
-            System.out.println(out);
-            chatList.add(out);
-            saveLog(chatList);
-            System.exit(0);
-        }
-        if (!STOP.equals(userMessage) && !CONTINUE.equals(userMessage) && !OUT.equals(userMessage)) {
-            String botTalks = answerList.get(randomBotLine(answerList));
-            System.out.println(botTalks);
-            chatList.add(botTalks);
-            run();
-        }
+        String out = "I`ll be back";
+        System.out.println(out);
+        chatList.add(out);
+        saveLog(chatList);
+        System.exit(0);
     }
 
     /**
@@ -109,9 +108,10 @@ public class ConsoleChat {
      */
     private boolean getContinue() {
         Scanner scanner = new Scanner(System.in);
-        String continueMessage = scanner.next();
+        String continueMessage = scanner.nextLine();
+        chatList.add(continueMessage);
         while (!CONTINUE.equals(continueMessage)) {
-            continueMessage = scanner.next();
+            continueMessage = scanner.nextLine();
             chatList.add(continueMessage);
         }
         return true;
