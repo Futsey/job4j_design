@@ -26,8 +26,9 @@ public class ConsoleChat {
      * {@link ru.job4j.io.ConsoleChat#CONTINUE)} - возобновляет вывод ответа Бота в чат
      * {@link ru.job4j.io.ConsoleChat#path)} - путь к текстовому Лог-файлу
      * {@link ru.job4j.io.ConsoleChat#botAnswers)} - путь к текстовому перечню ответов Бота
-     * {@link ru.job4j.io.ConsoleChat#chatList)} - Лист, куда записываем все фразы от пользователя и бота
+     * {@link ru.job4j.io.ConsoleChat#chatList)} - Лист, куда записываем все фразы от пользователя и Бота
      * для последующей записи в Лог-файл
+     * {@link ru.job4j.io.ConsoleChat#answerList)} - Лист, куда записываем все фразы от Бота
      */
     private static final String OUT = "закончить";
     private static final String STOP = "стоп";
