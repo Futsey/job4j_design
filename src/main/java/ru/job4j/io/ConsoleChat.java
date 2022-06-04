@@ -34,7 +34,8 @@ public class ConsoleChat {
     private static final String CONTINUE = "продолжить";
     private final String path;
     private final String botAnswers;
-    private static List<String> chatList = new ArrayList<>();
+    private static List<String> chatList = new LinkedList<>();
+    private static List<String> answerList = new ArrayList<>();;
 
     public ConsoleChat(String path, String botAnswers) {
         this.path = path;
@@ -47,21 +48,29 @@ public class ConsoleChat {
     public void run() {
         Scanner scanner = new Scanner(System.in);
         String userMessage = scanner.next();
-        if (userMessage.equals(STOP)) {
-            chatList.add(userMessage);
+        chatList.add(userMessage);
+        readPhrases();
+        if (STOP.equals(userMessage)) {
+            String stop = "Stop";
+            System.out.println(stop);
+            chatList.add(stop);
             getContinue();
-            System.out.println("Continue");
+            String contin = "Continue";
+            System.out.println(contin);
+            chatList.add(contin);
             run();
         }
-        if (userMessage.equals(OUT)) {
-            chatList.add(userMessage);
-            System.out.println("I`ll be back");
+        if (OUT.equals(userMessage)) {
+            String out = "I`ll be back";
+            System.out.println(out);
+            chatList.add(out);
+            saveLog(chatList);
             System.exit(0);
         }
-        if (!userMessage.equals(STOP) && !userMessage.equals(CONTINUE) && !userMessage.equals(OUT)) {
-            chatList.add(userMessage);
-            saveLog(chatList);
-            readPhrases();
+        if (!STOP.equals(userMessage) && !CONTINUE.equals(userMessage) && !OUT.equals(userMessage)) {
+            String botTalks = answerList.get(randomBotLine(answerList));
+            System.out.println(botTalks);
+            chatList.add(botTalks);
             run();
         }
     }
@@ -71,13 +80,9 @@ public class ConsoleChat {
      * {@link ru.job4j.io.ConsoleChat#randomBotLine(List)} )}
      */
     private void readPhrases() {
-        List<String> lineList = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(
                 new FileReader(botAnswers, Charset.forName("UTF-8")))) {
-            br.lines().forEach(lineList::add);
-            String tmp = lineList.get(randomBotLine(lineList));
-            System.out.println(tmp);
-            chatList.add(tmp);
+            br.lines().forEach(answerList::add);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -104,7 +109,7 @@ public class ConsoleChat {
     private boolean getContinue() {
         Scanner scanner = new Scanner(System.in);
         String continueMessage = scanner.next();
-        while (!continueMessage.equals(CONTINUE)) {
+        while (!CONTINUE.equals(continueMessage)) {
             continueMessage = scanner.next();
             chatList.add(continueMessage);
         }
@@ -118,7 +123,7 @@ public class ConsoleChat {
      */
     private int randomBotLine(List<String> lineList) {
         Random random = new Random();
-        return random.nextInt(chatList.size());
+        return random.nextInt(lineList.size());
     }
 
     public static void main(String[] args) {
