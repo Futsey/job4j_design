@@ -32,8 +32,8 @@ public class CSVReader {
         }
     }
 
-    public void handle(ArgsName argsName, CSVReader csvReader) {
-        csvReader.validate();
+    public void handle() {
+        validate();
         try (Scanner scanner = new Scanner(new FileInputStream(path.toFile()), StandardCharsets.UTF_8)) {
             scanner.useDelimiter(";");
             List<String> writerList = new ArrayList<>();
@@ -94,6 +94,6 @@ public class CSVReader {
         }
         ArgsName argsName = ArgsName.of(args);
         CSVReader csvReader = new CSVReader(argsName);
-        csvReader.handle(argsName, csvReader);
+        csvReader.handle();
     }
 }
