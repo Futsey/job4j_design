@@ -22,7 +22,7 @@ public class CSVReader {
         this.filter = args.get("filter").split(",");
     }
 
-    private void validate(ArgsName argsName) {
+    private void validate() {
         if (!";".equals(delimiter)) {
             throw new IllegalArgumentException("Wrong char to split: " + delimiter);
         }
@@ -32,9 +32,8 @@ public class CSVReader {
         }
     }
 
-    public void handle(ArgsName argsName) {
-        CSVReader csvReader = new CSVReader(argsName);
-        csvReader.validate(argsName);
+    public void handle(ArgsName argsName, CSVReader csvReader) {
+        csvReader.validate();
         try (Scanner scanner = new Scanner(new FileInputStream(path.toFile()), StandardCharsets.UTF_8)) {
             scanner.useDelimiter(";");
             List<String> writerList = new ArrayList<>();
@@ -95,6 +94,6 @@ public class CSVReader {
         }
         ArgsName argsName = ArgsName.of(args);
         CSVReader csvReader = new CSVReader(argsName);
-        csvReader.handle(argsName);
+        csvReader.handle(argsName, csvReader);
     }
 }
