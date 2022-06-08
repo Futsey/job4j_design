@@ -37,5 +37,11 @@ public class UsageLog4j {
                 relaxEfficiency,
                 firstLiteralOfAlphabet,
                 alive);
+
+        try {
+            throw new Exception("Not supported code");
+        } catch (Exception e) {
+            LOG.error("Exception in log example", e);
+        }
     }
 }
