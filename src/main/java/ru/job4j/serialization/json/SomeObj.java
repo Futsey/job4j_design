@@ -1,17 +1,32 @@
 package ru.job4j.serialization.json;
 
+import javax.xml.bind.annotation.*;
 import java.util.Arrays;
 
+@XmlRootElement(name = "someObj")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class SomeObj {
 
+    @XmlAttribute
     public boolean exist;
     public int id;
     public String name;
+
+    @XmlElementWrapper(name = "someObjects")
+    @XmlElement(name = "object")
     public SomeObjInObj[] obj;
 
+    public SomeObj() { }
+
+
+    @XmlRootElement(name = "SomeObjInObj")
+    @XmlAccessorType(XmlAccessType.FIELD)
     public static class SomeObjInObj {
+        @XmlAttribute
         public int id;
         public String name;
+
+        public SomeObjInObj() { }
 
         public SomeObjInObj(int id, String name) {
             this.id = id;
