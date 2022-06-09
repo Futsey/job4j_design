@@ -26,5 +26,13 @@ public class SomeObj {
         this.obj = obj;
     }
 
-
+    @Override
+    public String toString() {
+        return "SomeObj{"
+                + "exist=" + exist
+                + ", id=" + id
+                + ", name='" + name + '\''
+                + ", obj=" + Arrays.toString(obj)
+                + '}';
+    }
 }

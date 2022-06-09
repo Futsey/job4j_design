@@ -35,17 +35,18 @@ public class Main {
                 "{"
                         + "\"exist\":true,"
                         + "\"id\":5959,"
-                        + "\"name\":\"someObj\""
+                        + "\"name\":\"someObj\","
+                        + "\"SomeObjInObj\":"
                         + "["
                         + "{"
-                        + "\"id\": 36"
+                        + "\"id\": 36,"
                         + "\"name\":\"someName\""
                         + "},"
                         + "{"
-                        + "\"id\": 1456"
+                        + "\"id\": 1456,"
                         + "\"name\":\"someName1456\""
-                        + "},"
-                        + "]\"}";
+                        + "}"
+                        + "]}";
         final SomeObj someObjMod = gson.fromJson(someObjJson, SomeObj.class);
         System.out.println(someObjMod);
     }
