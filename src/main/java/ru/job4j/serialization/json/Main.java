@@ -9,9 +9,9 @@ public class Main {
         final Person person = new Person(false, 30, new Contact("11-111"),
                 new String[] {"Worker", "Married"});
         final SomeObj someObj = new SomeObj(true, 5959, "someObj",
-                new SomeObj.SomeObjInObj[
+                new SomeObj.SomeObjInObj[]{
                         new SomeObj.SomeObjInObj(36, "someName"),
-                        new SomeObj.SomeObjInObj(1456, "someName1456")]);
+                        new SomeObj.SomeObjInObj(1456, "someName1456")});
 
         final Gson gson = new GsonBuilder().create();
         System.out.println(gson.toJson(person));
