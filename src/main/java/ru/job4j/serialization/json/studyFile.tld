@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<person activeLearn="true" course="junior" age="41">
+    <contact mail="mail@mail.com"/>
+    <activeDays>
+        <active>monday</active>
+        <active>tuesday</active>
+        <active>wednesday</active>
+        <active>thursday</active>
+        <active>friday</active>
+    </activeDays>
+    <inactiveDays>
+        <inactive>saturday</inactive>
+        <inactive>sunday</inactive>
+    </inactiveDays>
+</person>
