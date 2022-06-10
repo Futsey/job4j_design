@@ -32,6 +32,14 @@ public class SomeObj {
             this.id = id;
             this.name = name;
         }
+
+        @Override
+        public String toString() {
+            return "SomeObjInObj{"
+                    + "id=" + id
+                    + ", name='" + name + '\''
+                    + '}';
+        }
     }
 
     public SomeObj(boolean exist, int id, String name, SomeObjInObj[] obj) {
