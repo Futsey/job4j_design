@@ -16,6 +16,7 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) throws Exception {
+        String tmp = "11-111";
         final Person person = new Person(false, 30, new Contact("11-111"),
                 new String[]{"Worker", "Married"});
         final SomeObj someObj = new SomeObj(true, 5959, "someObj",
@@ -108,12 +109,12 @@ public class Main {
         jsonMyObj.put("name", someObj.getName());
         jsonMyObj.put("SomeObjInObj[]", someObj.getObj());
 
+        System.out.println(jsonObject);
+        System.out.println(jsonMyObj);
 
-        System.out.println(jsonObject.toString());
-        System.out.println(jsonMyObj.toString());
-
-        System.out.println(new JSONObject(person).toString());
-        System.out.println(new JSONObject(someObj).toString());
-
+        System.out.println(System.lineSeparator() + "----------- person" + System.lineSeparator());
+        System.out.println(new JSONObject(person));
+        System.out.println(System.lineSeparator() + "----------- someObj" + System.lineSeparator());
+        System.out.println(new JSONObject(someObj));
     }
 }
