@@ -2,12 +2,16 @@ package ru.job4j.serialization.json;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
 
@@ -84,5 +88,32 @@ public class Main {
             SomeObj someObjResult = (SomeObj) unmarshaller.unmarshal(reader);
             System.out.println(someObjResult);
         }
+
+        JSONObject jsonContact = new JSONObject("{\"phone\":\"+7(924)111-111-11-11\"}");
+
+        List<String> list = new ArrayList<>();
+        list.add("Student");
+        list.add("Free");
+        JSONArray jsonStatuses = new JSONArray(list);
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("sex", person.isSex());
+        jsonObject.put("age", person.getAge());
+        jsonObject.put("contact", jsonContact);
+        jsonObject.put("statuses", jsonStatuses);
+
+        JSONObject jsonMyObj = new JSONObject();
+        jsonMyObj.put("exist", someObj.isExist());
+        jsonMyObj.put("id", someObj.getId());
+        jsonMyObj.put("name", someObj.getName());
+        jsonMyObj.put("SomeObjInObj[]", someObj.getObj());
+
+
+        System.out.println(jsonObject.toString());
+        System.out.println(jsonMyObj.toString());
+
+        System.out.println(new JSONObject(person).toString());
+        System.out.println(new JSONObject(someObj).toString());
+
     }
 }

@@ -33,6 +33,14 @@ public class SomeObj {
             this.name = name;
         }
 
+        public int getId() {
+            return id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
         @Override
         public String toString() {
             return "SomeObjInObj{"
@@ -47,6 +55,22 @@ public class SomeObj {
         this.id = id;
         this.name = name;
         this.obj = obj;
+    }
+
+    public boolean isExist() {
+        return exist;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public SomeObjInObj[] getObj() {
+        return obj;
     }
 
     @Override
