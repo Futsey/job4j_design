@@ -4,14 +4,13 @@ create table apartment_passport(
 	owner_id int references owner(id) unique
 );
 
-ALTER TABLE owner ADD COLUMN apartment_passport_id int references apartment_passport(id) unique;
-
 insert into apartment_passport (seria, owner_id)
 values
-(101, 17),
-(102, 18),
-(103, 20),
-(104, 19)
+(101, 1),
+(102, 2),
+(103, 3),
+(104, 4),
+(105, 4)
 ;
 
 select * from apartment_passport

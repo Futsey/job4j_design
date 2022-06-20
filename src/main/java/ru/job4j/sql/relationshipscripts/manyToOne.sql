@@ -20,13 +20,13 @@ values
 
 insert into apartment(apartmentNumber, house_id)
 VALUES
-(1, 7),
-(2, 7),
-(3, 7),
-(1, 8),
-(1, 9),
-(1, 10),
-(1, 11);
+(1, 1),
+(2, 1),
+(3, 1),
+(1, 2),
+(1, 3),
+(1, 4),
+(1, 5);
 
 select * from house where id in (select id from apartment);
 select * from house where id in (7);
