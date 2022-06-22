@@ -79,34 +79,35 @@ from voter as v
 inner join candidate as c
 on v.id = c.id;
 
-select v.name, v.constituency
+select
+v.name,
+v.constituency
 from voter as v
 where v.constituency is null;
 
-select v.name, c.name, c.political_party
-from voter as v
-inner join candidate as c
-on v.id = c.id;
+select v.name as voterName, c.name as canditateName, c.political_party as party, b.number as bulletinNumber
+from bulletin b
+join candidate c
+on b.candidate_id = c.id
+join voter v
+on b.candidate_id = v.id;
 
-select v.name, b.number
-from voter as v
-inner join bulletin as b
-on v.id = b.id;
+select c.political_party as party, v.name as voterName
+from bulletin b
+join candidate c
+on b.candidate_id = c.id
+join voter v
+on b.candidate_id = v.id;
 
-select c.name, v.name
-from candidate as c
-inner join voter as v
-on c.id = v.id;
+select b.number as bulletinNumber, v.name as voterName, b.voter_id
+from bulletin b
+join voter v
+on b.candidate_id = v.id;
 
-select v.name, b.candidate_id
-from voter as v
-inner join bulletin as b
-on v.id = b.id;
-
-select b.candidate_id, c.name
-from bulletin as b
-inner join candidate as c
-on b.id = c.id;
+select c.name as canditateName, b.candidate_id, b.number as bulletinNumber
+from bulletin b
+join candidate c
+on b.candidate_id = c.id;
 
 
 
