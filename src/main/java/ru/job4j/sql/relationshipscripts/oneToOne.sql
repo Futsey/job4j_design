@@ -1,9 +1,3 @@
-create table apartment_passport(
-    id serial primary key,
-    seria int,
-	owner_id int references owner(id) unique
-);
-
 insert into apartment_passport (seria, owner_id)
 values
 (101, 1),

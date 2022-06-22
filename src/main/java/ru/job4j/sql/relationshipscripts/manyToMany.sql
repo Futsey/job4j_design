@@ -13,9 +13,8 @@ values
 
  create table owning(
      id serial primary key,
-     owner_id int references owner(id) unique,
-     apartment_id int references apartment(id) unique,
-     name varchar (200)
+     fk_owner_id int references owner(id),
+     fk_apartment_id int references apartment(id)
  );
 
 insert into owning(owner_id, apartment_id, name)

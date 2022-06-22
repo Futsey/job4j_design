@@ -6,7 +6,7 @@ create table house (
 create table apartment (
 	id serial primary key,
 	apartmentNumber smallint,
-	house_id smallint references house (id)
+	fk_house_id smallint references house (id)
 );
 
 insert into house(houseNumber)
