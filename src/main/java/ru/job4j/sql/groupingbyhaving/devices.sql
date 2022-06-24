@@ -15,7 +15,7 @@ create table workers(
 create table devices_people(
     id serial primary key,
     device_id int references devices(id),
-    people_id int references people(id)
+    workers_id int references workers(id)
 );
 
 insert into devices (name, price)
@@ -36,7 +36,7 @@ insert into workers (name)
  ('Daniel')
 ;
 
-insert into devices_people (device_id, people_id)
+insert into devices_people (device_id, workers_id)
  values
  (1, 1),
  (2, 2),
@@ -63,15 +63,19 @@ join devices d
 on dp.device_id = d.id
 group by dp.device_id, d.name;
 
-select dp.people_id, avg(d.price)
+select COUNT(*) AS devCount, w.name, dp.device_id, avg(d.price)
 from devices_people as dp
+join workers w
+on dp.device_id = w.id
 join devices d
 on dp.device_id = d.id
-group by dp.people_id;
+group by w.name, dp.device_id;
 
-select dp.people_id, avg(d.price)
+select w.name, dp.device_id, avg(d.price)
 from devices_people as dp
 join devices d
 on dp.device_id = d.id
-group by dp.people_id
+join workers w
+on dp.device_id = w.id
+group by w.name, dp.device_id
 having avg(d.price) > 5000;
