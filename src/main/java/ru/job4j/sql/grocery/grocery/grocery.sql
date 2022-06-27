@@ -10,7 +10,7 @@ insert into product_type(name)
 values
 ('Сыры'),
 ('Молоко'),
-('Мороженное'),
+('Мороженое'),
 ('Кефир')
 ;
 
@@ -35,12 +35,12 @@ values
 ('Молоко Тюменское', 2, '2022-07-02', 81),
 ('Молоко Сургутское', 2, '2022-07-10', 94),
 ('Молоко Немолоко', 2, '2022-07-30', 121),
-('Мороженное Alpen', 3, '2022-08-21', 49),
-('Мороженное Сникерс', 3, '2022-09-17', 56),
-('Мороженное Буренка', 3, '2022-07-13', 52),
-('Мороженное Алтай', 3, '2022-07-28', 67),
-('Мороженное Челябинск', 3, '2022-08-15', 38),
-('Мороженное Тюмень', 3, '2022-08-25', 44),
+('Мороженое Alpen', 3, '2022-08-21', 49),
+('Мороженое Сникерс', 3, '2022-09-17', 56),
+('Мороженое Буренка', 3, '2022-07-13', 52),
+('Мороженое Алтай', 3, '2022-07-28', 67),
+('Мороженое Челябинск', 3, '2022-08-15', 38),
+('Мороженое Тюмень', 3, '2022-08-25', 44),
 ('Кефир Ишимский', 4, '2022-07-01', 94),
 ('Кефир Губкинский', 4, '2022-07-04', 99),
 ('Кефир Тюменский', 4, '2022-07-02', 90),
@@ -51,9 +51,21 @@ select name
 from product
 where fk_product_type_id in (1);
 
+SELECT p.name
+FROM product  p
+JOIN product_type pt
+on p.fk_product_type_id = pt.id
+where pt.name like '%Сыры%'
+group by p.name;
+
 select name
 from product
 where fk_product_type_id in (3);
+
+SELECT p.name
+FROM product  p
+where p.name like '%Мороженое%'
+group by p.name;
 
 SELECT name, expired_date
 FROM   product
@@ -85,11 +97,32 @@ on p.fk_product_type_id = pt.id
 where fk_product_type_id in (1)
 group by pt.name;
 
+SELECT pt.name, count(p.id) AS product_overall
+FROM product  p
+JOIN product_type pt
+on p.fk_product_type_id = pt.id
+group by pt.name
+order by pt.name;
+
+SELECT pt.name, count(p.id) AS product_overall
+FROM product  p
+JOIN product_type pt
+on p.fk_product_type_id = pt.id
+where pt.name like '%Сыры%'
+group by pt.name;
+
 SELECT p.name
 FROM product  p
 JOIN product_type pt
 on p.fk_product_type_id = pt.id
 where fk_product_type_id in (1,2)
+group by p.name;
+
+SELECT p.name
+FROM product  p
+JOIN product_type pt
+on p.fk_product_type_id = pt.id
+where pt.name like '%Сыры%' or pt.name like '%Молоко%'
 group by p.name;
 
 SELECT pt.name, count(p.id) AS product_overall
