@@ -63,19 +63,19 @@ join devices d
 on dp.device_id = d.id
 group by dp.device_id, d.name;
 
-select COUNT(*) AS devCount, w.name, dp.device_id, avg(d.price)
+select w.name, avg(d.price)
 from devices_people as dp
 join workers w
-on dp.device_id = w.id
+on dp.workers_id = w.id
 join devices d
 on dp.device_id = d.id
-group by w.name, dp.device_id;
+group by w.name;
 
-select w.name, dp.device_id, avg(d.price)
+select w.name, avg(d.price)
 from devices_people as dp
+join workers w
+on dp.workers_id = w.id
 join devices d
 on dp.device_id = d.id
-join workers w
-on dp.device_id = w.id
-group by w.name, dp.device_id
+group by w.name
 having avg(d.price) > 5000;
