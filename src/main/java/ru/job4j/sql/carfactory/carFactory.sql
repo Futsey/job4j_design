@@ -83,5 +83,27 @@ on c.fk_transmission_id = t.id
 where cc.current_cartype IS NULL or e.name IS NULL or t.name IS NULL
 group by c.name, cc.current_cartype, e.name, t.name;
 
+select c.name, cc.current_cartype
+from car as c
+left join carcass cc
+on c.fk_carcass_id = cc.id
+where cc.current_cartype is NULL
+group by c.name, cc.current_cartype;
+
+select c.name,e.name
+from car as c
+left join engine e
+on c.fk_engine_id = e.id
+where e.name IS NULL
+group by c.name, e.name;
+
+select c.name, t.name
+from car as c
+left join transmission t
+on c.fk_transmission_id = t.id
+where t.name IS NULL
+group by c.name, t.name;
+
+
 
 
