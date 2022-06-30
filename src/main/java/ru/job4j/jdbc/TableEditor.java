@@ -110,7 +110,7 @@ public class TableEditor implements AutoCloseable {
         }
     }
 
-    public static void main(String[] args) throws ClassNotFoundException, SQLException {
+    public static void main(String[] args) throws Exception {
         Properties config = new Properties();
         try (InputStream in = TableEditor.class.getClassLoader()
                 .getResourceAsStream("tableEditorProperties.properties")) {
@@ -124,8 +124,6 @@ public class TableEditor implements AutoCloseable {
             tableEditor.renameColumn("demo_table", "new_column", "altercolumn");
             tableEditor.dropColumn("demo_table", "altercolumn");
             tableEditor.dropTable("demo_table");
-        } catch (Exception e) {
-            throw new RuntimeException("TableEditor: main(): class is missing: " + e);
         }
         System.out.println("Program DONE!");
     }
