@@ -1,6 +1,7 @@
 package ru.job4j.jdbc;
 
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.sql.*;
 import java.util.Properties;
 import java.util.StringJoiner;
@@ -8,7 +9,7 @@ import java.util.StringJoiner;
 public class TableEditor implements AutoCloseable {
 
     private Connection connection;
-    private static Properties properties = new Properties();
+    private Properties properties;
 
     public TableEditor(Properties properties) throws SQLException, ClassNotFoundException {
         this.properties = properties;
@@ -26,80 +27,60 @@ public class TableEditor implements AutoCloseable {
         System.out.println(metaData.getURL());
     }
 
-    public void createTable(String tableName) {
+    private void initStatement(String sql) {
         try (Statement statement = connection.createStatement()) {
-            String sql = String.format(
-                    "Create table if not exists %s(%s, %s);",
-                    tableName,
-                    "id serial primary key",
-                    "name varchar(255)"
-            );
             statement.execute(sql);
+        } catch (SQLException e) {
+            throw new RuntimeException("TableEditor: initStatement(): Table is missing: " + e);
+        }
+    }
+
+    public void createTable(String tableName) {
+            String sql = String.format(
+                    "Create table if not exists %s(%s);",
+                    tableName,
+                    "id serial primary key");
+            initStatement(sql);
+        try {
             System.out.println(getTableScheme(connection, "demo_table"));
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException("TableEditor: createTable(): Table is missing: " + e);
         }
     }
 
     public void dropTable(String tableName) {
-        try (Statement statement = connection.createStatement()) {
-            String sql = String.format(
-                    "Drop table %s;", tableName
-            );
-            statement.execute(sql);
-            System.out.println(tableName + ": " + " table dropped");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        String sql = String.format("Drop table %s;", tableName);
+        initStatement(sql);
+        System.out.println(tableName + ": " + " table dropped");
     }
 
     public void addColumn(String tableName, String columnName, String type, String length) {
-        try (Statement statement = connection.createStatement()) {
-            String sql = String.format(
-                    "Alter table %s add column %s %s %s;", tableName, columnName, type, length
-            );
-            statement.execute(sql);
+        String sql = String.format("Alter table %s add column %s %s %s;", tableName, columnName, type, length);
+        initStatement(sql);
+        try {
             System.out.println(getTableScheme(connection, "demo_table"));
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException("TableEditor: addColumn(): Table is missing: " + e);
         }
     }
 
     public void dropColumn(String tableName, String columnName) {
-        try (Statement statement = connection.createStatement()) {
-            String sql = String.format(
-                    "Alter table %s drop column %s;", tableName, columnName
-            );
-            statement.execute(sql);
+        String sql = String.format("Alter table %s drop column %s;", tableName, columnName);
+        initStatement(sql);
+        try {
             System.out.println(getTableScheme(connection, "demo_table"));
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException("TableEditor: dropColumn(): Table is missing: " + e);
         }
     }
 
     public void renameColumn(String tableName, String columnName, String newColumnName) {
-        try (Statement statement = connection.createStatement()) {
-            String sql = String.format(
-                    "Alter table %s rename column %s to %s;", tableName, columnName, newColumnName
-            );
-            statement.execute(sql);
+        String sql = String.format("Alter table %s rename column %s to %s;", tableName, columnName, newColumnName);
+        initStatement(sql);
+        try {
             System.out.println(getTableScheme(connection, "demo_table"));
         } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static void setProperties(String propName,
-                               String keyUrl, String valueUrl,
-                               String keyLogin, String valueLogin,
-                               String keyPassword, String valuePassword) {
-        properties.setProperty(keyUrl, valueUrl);
-        properties.setProperty(keyLogin, valueLogin);
-        properties.setProperty(keyPassword, valuePassword);
-        try (FileOutputStream fout = new FileOutputStream(propName)) {
-            properties.store(fout, propName);
-        } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException("TableEditor: renameColumn(): Table is missing: " + e);
         }
     }
 
@@ -130,29 +111,21 @@ public class TableEditor implements AutoCloseable {
     }
 
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
-        System.out.println("Program START!");
-        String propName = "tableEditorProperties.properties";
-        String keyUrl = "url";
-        String valueUrl = "jdbc:postgresql://localhost:5432/electorate";
-        String keyLogin = "login";
-        String valueLogin = "postgres";
-        String keyPassword = "password";
-        String valuePassword = "password";
-        setProperties(propName,
-                keyUrl, valueUrl,
-                keyLogin, valueLogin,
-                keyPassword, valuePassword);
-
-        TableEditor tableEditor = new TableEditor(properties);
-        tableEditor.createTable("demo_table");
-        tableEditor.addColumn("demo_table", "new_column", "varchar", "(200)");
-        tableEditor.renameColumn("demo_table", "new_column", "altercolumn");
-        tableEditor.dropColumn("demo_table", "altercolumn");
-        tableEditor.dropTable("demo_table");
-        try {
-            tableEditor.close();
+        Properties config = new Properties();
+        try (InputStream in = TableEditor.class.getClassLoader()
+                .getResourceAsStream("tableEditorProperties.properties")) {
+            config.load(in);
         } catch (Exception e) {
             throw new RuntimeException(e);
+        }
+        try (TableEditor tableEditor = new TableEditor(config)) {
+            tableEditor.createTable("demo_table");
+            tableEditor.addColumn("demo_table", "new_column", "varchar", "(200)");
+            tableEditor.renameColumn("demo_table", "new_column", "altercolumn");
+            tableEditor.dropColumn("demo_table", "altercolumn");
+            tableEditor.dropTable("demo_table");
+        } catch (Exception e) {
+            throw new RuntimeException("TableEditor: main(): class is missing: " + e);
         }
         System.out.println("Program DONE!");
     }
