@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MaxMinTest {
 
-    private List<Integer> value = List.of(1,2,3,4,5,6,7,8,9,10,11,12);
+    private List<Integer> value = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
     private Comparator<Integer> comparator = Comparator.naturalOrder();
     private MaxMin maxMin = new MaxMin();
 
