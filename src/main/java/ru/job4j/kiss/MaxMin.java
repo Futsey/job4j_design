@@ -5,18 +5,24 @@ import java.util.*;
 public class MaxMin {
 
     public <T> T max(List<T> value, Comparator<T> comparator) {
-        T result = value.get(0);
-        for (int i = 1; i < value.size(); i++) {
-            if (value.get(i) != null
-                    && comparator.compare(result, value.get(i)) < 0) {
-                result = value.get(i);
-            }
-        }
-        return result;
+        return numerator(value, comparator);
     }
 
     public <T> T min(List<T> value, Comparator<T> comparator) {
-        return new MaxMin().max(value, comparator.reversed());
+        return numerator(value, comparator.reversed());
+    }
+
+    public <T> T numerator(List<T> value, Comparator<T> comparator) {
+        if (value.isEmpty()) {
+            throw new NoSuchElementException();
+        }
+        T res = value.get(0);
+        for (T el : value) {
+            if (comparator.compare(el, res) > 0) {
+                res = el;
+            }
+        }
+        return res;
     }
 
     public static void main(String[] args) {
