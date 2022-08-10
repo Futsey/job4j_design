@@ -25,8 +25,7 @@ class MaxMinTest {
     }
 
     @Test
-    void expectedNull()
-    {
+    void expectedNull() {
         List<Integer> nullValue = List.of();
         Assertions.assertNull(maxMin.isEmpty(nullValue), "Should return null");
     }
