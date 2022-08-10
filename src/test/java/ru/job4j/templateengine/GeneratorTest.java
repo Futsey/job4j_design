@@ -18,7 +18,7 @@ class GeneratorTest {
         users.put("name", "Petr Arsentev");
         users.put("subject", "you");
         String expected = "I am a Petr Arsentev, Who are you? ";
-        assertThat(expected).isEqualTo(generator.produce("User Generator", users));
+        assertThat(expected).isEqualTo(generator.produce("I am a ${name}, Who are ${subject}? ", users));
     }
 
     @Test()
@@ -27,7 +27,7 @@ class GeneratorTest {
         Map<String, String> users = new HashMap<>();
         users.put("name", "Petr Arsentev");
         assertThrows(IllegalArgumentException.class, () -> {
-            generator.produce("User Generator", users);
+            generator.produce("I am a ${name}, Who are ${subject}? ", users);
         });
     }
 
@@ -37,7 +37,7 @@ class GeneratorTest {
         Map<String, String> users = new HashMap<>();
         users.put("subject", "you");
         assertThrows(IllegalArgumentException.class, () -> {
-            generator.produce("User Generator", users);
+            generator.produce("I am a ${name}, Who are ${subject}? ", users);
         });
     }
 
@@ -48,7 +48,7 @@ class GeneratorTest {
         users.put("name", "Petr Arsentev");
         users.put("subject", null);
         assertThrows(IllegalArgumentException.class, () -> {
-            generator.produce("User Generator", users);
+            generator.produce("I am a ${name}, Who are ${subject}? ", users);
         });
     }
 
@@ -59,7 +59,7 @@ class GeneratorTest {
         users.put("name", null);
         users.put("subject", "you");
         assertThrows(IllegalArgumentException.class, () -> {
-            generator.produce("User Generator", users);
+            generator.produce("I am a ${name}, Who are ${subject}? ", users);
         });
     }
 
@@ -70,7 +70,7 @@ class GeneratorTest {
         users.put("name", "Petr Arsentev");
         users.put(null, "you");
         assertThrows(IllegalArgumentException.class, () -> {
-            generator.produce("User Generator", users);
+            generator.produce("I am a ${name}, Who are ${subject}? ", users);
         });
     }
 
@@ -81,7 +81,7 @@ class GeneratorTest {
         users.put(null, "Petr Arsentev");
         users.put("subject", "you");
         assertThrows(IllegalArgumentException.class, () -> {
-            generator.produce("User Generator", users);
+            generator.produce("I am a ${name}, Who are ${subject}? ", users);
         });
     }
 }
