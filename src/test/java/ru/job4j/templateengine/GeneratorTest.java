@@ -15,27 +15,72 @@ class GeneratorTest {
     public void whenAdd() {
         Generator generator = new UserGenerator();
         Map<String, String> users = new HashMap<>();
-        users.put("Petr Arsentev", "you");
+        users.put("name", "Petr Arsentev");
+        users.put("subject", "you");
         String expected = "I am a Petr Arsentev, Who are you? ";
         assertThat(expected).isEqualTo(generator.produce("User Generator", users));
     }
 
     @Test()
-    public void whenAddNullKey() {
+    public void whenAddOnlyName() {
         Generator generator = new UserGenerator();
         Map<String, String> users = new HashMap<>();
-        users.put(null, "you");
-        assertThrows(NullPointerException.class, () -> {
+        users.put("name", "Petr Arsentev");
+        assertThrows(IllegalArgumentException.class, () -> {
             generator.produce("User Generator", users);
         });
     }
 
     @Test()
-    public void whenAddNullValue() {
+    public void whenAddOnlySubject() {
         Generator generator = new UserGenerator();
         Map<String, String> users = new HashMap<>();
-        users.put("Petr Arsentev", null);
-        assertThrows(NullPointerException.class, () -> {
+        users.put("subject", "you");
+        assertThrows(IllegalArgumentException.class, () -> {
+            generator.produce("User Generator", users);
+        });
+    }
+
+    @Test()
+    public void whenAddNullValueInSubject() {
+        Generator generator = new UserGenerator();
+        Map<String, String> users = new HashMap<>();
+        users.put("name", "Petr Arsentev");
+        users.put("subject", null);
+        assertThrows(IllegalArgumentException.class, () -> {
+            generator.produce("User Generator", users);
+        });
+    }
+
+    @Test()
+    public void whenAddNullValueInName() {
+        Generator generator = new UserGenerator();
+        Map<String, String> users = new HashMap<>();
+        users.put("name", null);
+        users.put("subject", "you");
+        assertThrows(IllegalArgumentException.class, () -> {
+            generator.produce("User Generator", users);
+        });
+    }
+
+    @Test()
+    public void whenAddNullKeyInSubject() {
+        Generator generator = new UserGenerator();
+        Map<String, String> users = new HashMap<>();
+        users.put("name", "Petr Arsentev");
+        users.put(null, "you");
+        assertThrows(IllegalArgumentException.class, () -> {
+            generator.produce("User Generator", users);
+        });
+    }
+
+    @Test()
+    public void whenAddNullKeyInName() {
+        Generator generator = new UserGenerator();
+        Map<String, String> users = new HashMap<>();
+        users.put(null, "Petr Arsentev");
+        users.put("subject", "you");
+        assertThrows(IllegalArgumentException.class, () -> {
             generator.produce("User Generator", users);
         });
     }
