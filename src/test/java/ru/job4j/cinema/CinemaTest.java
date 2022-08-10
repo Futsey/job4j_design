@@ -11,7 +11,6 @@ import java.util.TimeZone;
 @Disabled
 class CinemaTest {
 
-
     @Test
     public void whenBuy() {
         Account account = new AccountCinema();
