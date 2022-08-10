@@ -16,19 +16,18 @@ class MaxMinTest {
 
     @Test
     void maxTest() {
-        assertEquals(12, maxMin.max(value, comparator));
+        assertEquals(12, maxMin.max(value, comparator), "Should return max");
     }
 
     @Test
     void minTest() {
-        assertEquals(1, maxMin.min(value, comparator));
+        assertEquals(1, maxMin.min(value, comparator), "Should return min");
     }
 
     @Test
-    void testExpectedExceptionWithParentType() {
+    void expectedNull()
+    {
         List<Integer> nullValue = List.of();
-        Assertions.assertThrows(NoSuchElementException.class, () -> {
-            maxMin.max(nullValue, comparator);
-        });
+        Assertions.assertNull(maxMin.isEmpty(nullValue), "Should return null");
     }
 }

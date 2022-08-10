@@ -13,16 +13,17 @@ public class MaxMin {
     }
 
     public <T> T numerator(List<T> value, Comparator<T> comparator) {
-        if (value.isEmpty()) {
-            throw new NoSuchElementException();
-        }
-        T res = value.get(0);
+        T res = isEmpty(value);
         for (T el : value) {
             if (comparator.compare(el, res) > 0) {
                 res = el;
             }
         }
         return res;
+    }
+
+    public <T> T isEmpty(List<T> value) {
+        return value.isEmpty() ? null : value.get(0);
     }
 
     public static void main(String[] args) {
