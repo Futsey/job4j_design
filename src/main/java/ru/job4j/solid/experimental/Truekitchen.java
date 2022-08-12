@@ -1,4 +1,4 @@
-package ru.job4j.solid.correctimpl;
+package ru.job4j.solid.experimental;
 
 public class Truekitchen implements Cook, Wash {
 
@@ -8,7 +8,7 @@ public class Truekitchen implements Cook, Wash {
     }
 
     @Override
-    public void cookBorsch() {
+    public void cookBorsch(Potato potato, PorkFat porkfat) {
 
     }
 
