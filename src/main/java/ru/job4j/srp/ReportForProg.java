@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 public class ReportForProg implements Report {
 
     public static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd:MM:yyyy HH:mm");
-    private static final String SEPARATOR = System.lineSeparator();
+    public static final String SEPARATOR = System.lineSeparator();
 
     private Store store;
 
@@ -17,13 +17,19 @@ public class ReportForProg implements Report {
     @Override
     public String generate(Predicate<Employee> filter) {
         StringBuilder text = new StringBuilder()
-                .append("<html" + SEPARATOR
-                        + "<head>" + SEPARATOR
-                        + "<meta charset=\"UTF-8\">" + SEPARATOR
-                        + "<meta http-equiv=\"X-RU-Compatible\" content=\"IE=edge\">" + SEPARATOR
-                        + "<meta name=\"reportHTML\" content=\"width=device-width, initial-scale=1.0\">" + SEPARATOR
-                        + "<link rel=\"icon\" href=\"past here your logo path\" type=\"image/x-icon\">" + SEPARATOR
-                        + "<body>" + SEPARATOR)
+                .append("<html".concat(SEPARATOR)
+                        .concat("<head>")
+                        .concat(SEPARATOR)
+                        .concat("<meta charset=\"UTF-8\">")
+                        .concat(SEPARATOR)
+                        .concat("<meta http-equiv=\"X-RU-Compatible\" content=\"IE=edge\">")
+                        .concat(SEPARATOR)
+                        .concat("<meta name=\"reportHTML\" content=\"width=device-width, initial-scale=1.0\">")
+                        .concat(SEPARATOR)
+                        .concat("<link rel=\"icon\" href=\"past here your logo path\" type=\"image/x-icon\">")
+                        .concat(SEPARATOR)
+                        .concat("<body>")
+                        .concat(SEPARATOR))
                 .append("Name; Hired; Fired; Salary;");
         for (Employee worker : store.findBy(filter)) {
             text.append(System.lineSeparator())
@@ -32,7 +38,7 @@ public class ReportForProg implements Report {
                     .append(DATE_FORMAT.format(worker.getFired().getTime())).append(";")
                     .append(worker.getSalary()).append(";");
         }
-            text.append(SEPARATOR + "</body>" + SEPARATOR + "</head>" + SEPARATOR)
+            text.append(SEPARATOR.concat("</body>").concat(SEPARATOR).concat("</head>").concat(SEPARATOR))
                 .append(System.lineSeparator());
         return text.toString();
     }

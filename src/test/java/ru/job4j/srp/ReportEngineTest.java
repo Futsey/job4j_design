@@ -8,11 +8,10 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static ru.job4j.srp.ReportEngine.DATE_FORMAT;
+import static ru.job4j.srp.ReportFinance.EURO;
+import static ru.job4j.srp.ReportForProg.SEPARATOR;
 
 class ReportEngineTest {
-
-    private static final String SEPARATOR = System.lineSeparator();
-    public static final int EURO = 62;
 
     @Test
     public void whenOldGenerated() {
@@ -40,20 +39,27 @@ class ReportEngineTest {
         store.add(worker);
         Report engine = new ReportForProg(store);
         StringBuilder expect = new StringBuilder()
-                .append("<html" + SEPARATOR
-                        + "<head>" + SEPARATOR
-                        + "<meta charset=\"UTF-8\">" + SEPARATOR
-                        + "<meta http-equiv=\"X-RU-Compatible\" content=\"IE=edge\">" + SEPARATOR
-                        + "<meta name=\"reportHTML\" content=\"width=device-width, initial-scale=1.0\">" + SEPARATOR
-                        + "<link rel=\"icon\" href=\"past here your logo path\" type=\"image/x-icon\">" + SEPARATOR
-                        + "<body>" + SEPARATOR)
+                .append("<html"
+                        .concat(SEPARATOR)
+                        .concat("<head>")
+                        .concat(SEPARATOR)
+                        .concat("<meta charset=\"UTF-8\">")
+                        .concat(SEPARATOR)
+                        .concat("<meta http-equiv=\"X-RU-Compatible\" content=\"IE=edge\">")
+                        .concat(SEPARATOR)
+                        .concat("<meta name=\"reportHTML\" content=\"width=device-width, initial-scale=1.0\">")
+                        .concat(SEPARATOR)
+                        .concat("<link rel=\"icon\" href=\"past here your logo path\" type=\"image/x-icon\">")
+                        .concat(SEPARATOR)
+                        .concat("<body>")
+                        .concat(SEPARATOR))
                 .append("Name; Hired; Fired; Salary;")
                 .append(System.lineSeparator())
                 .append(worker.getName()).append(";")
                 .append(DATE_FORMAT.format(worker.getHired().getTime())).append(";")
                 .append(DATE_FORMAT.format(worker.getFired().getTime())).append(";")
                 .append(worker.getSalary()).append(";")
-                .append(SEPARATOR + "</body>" + SEPARATOR + "</head>" + SEPARATOR)
+                .append(SEPARATOR.concat("</body>").concat(SEPARATOR).concat("</head>").concat(SEPARATOR))
                 .append(System.lineSeparator());
         assertThat(engine.generate(em -> true)).isEqualTo(expect.toString());
     }
