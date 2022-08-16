@@ -32,14 +32,14 @@ public class ReportForProg implements Report {
                         .concat(SEPARATOR))
                 .append("Name; Hired; Fired; Salary;");
         for (Employee worker : store.findBy(filter)) {
-            text.append(System.lineSeparator())
+            text.append(SEPARATOR)
                     .append(worker.getName()).append(";")
                     .append(DATE_FORMAT.format(worker.getHired().getTime())).append(";")
                     .append(DATE_FORMAT.format(worker.getFired().getTime())).append(";")
                     .append(worker.getSalary()).append(";");
         }
             text.append(SEPARATOR.concat("</body>").concat(SEPARATOR).concat("</head>").concat(SEPARATOR))
-                .append(System.lineSeparator());
+                .append(SEPARATOR);
         return text.toString();
     }
 }

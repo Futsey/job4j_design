@@ -4,12 +4,10 @@ public class Truekitchen implements Cook, Wash {
 
     @Override
     public void cookFish() {
-
     }
 
     @Override
     public void cookBorsch(Potato potato, PorkFat porkfat) {
-
     }
 
     /** Нарушим принцип SRP и создадим внутри метода экземпляр класса Картофель, нам ведь надо что-то жарить.
@@ -32,11 +30,9 @@ public class Truekitchen implements Cook, Wash {
 
     @Override
     public void washDishes() {
-
     }
 
     @Override
     public void washGasStove() {
-
     }
 }

@@ -3,6 +3,7 @@ package ru.job4j.srp;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
+import static ru.job4j.srp.ReportForProg.SEPARATOR;
 
 public class ReportHR  implements Report {
 
@@ -19,11 +20,11 @@ public class ReportHR  implements Report {
         List<Employee> employees = store.findBy(filter);
         employees.sort(comparator);
         text.append("Name; Salary;")
-                .append(System.lineSeparator());
+                .append(SEPARATOR);
         for (Employee employee : employees) {
             text.append(employee.getName()).append(";")
                     .append(employee.getSalary()).append(";")
-                    .append(System.lineSeparator());
+                    .append(SEPARATOR);
         }
         return text.toString();
     }
