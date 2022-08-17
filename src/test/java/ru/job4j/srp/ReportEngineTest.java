@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Calendar;
 
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static ru.job4j.srp.ReportEngine.DATE_FORMAT;
 import static ru.job4j.srp.ReportFinance.EURO;

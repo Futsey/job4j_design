@@ -1,10 +1,10 @@
 package ru.job4j.solid.experimental;
 
-public class Potato implements IVegetables {
+public class Carrot implements IVegetables {
 
     @Override
     public IIngridients addIngridient() {
-        return new Potato();
+        return new Carrot();
     }
 
     @Override
@@ -14,6 +14,6 @@ public class Potato implements IVegetables {
 
     @Override
     public String toString() {
-        return "Potato{}";
+        return "Carrot{}";
     }
 }
