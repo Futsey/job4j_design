@@ -2,6 +2,7 @@ package ru.job4j.srp;
 
 import java.text.SimpleDateFormat;
 import java.util.function.Predicate;
+import static ru.job4j.srp.ReportForProg.SEPARATOR;
 
 public class ReportEngine implements Report {
 
@@ -17,13 +18,13 @@ public class ReportEngine implements Report {
     public String generate(Predicate<Employee> filter) {
         StringBuilder text = new StringBuilder();
         text.append("Name; Hired; Fired; Salary;")
-                .append(System.lineSeparator());
+                .append(SEPARATOR);
         for (Employee employee : store.findBy(filter)) {
             text.append(employee.getName()).append(";")
                     .append(DATE_FORMAT.format(employee.getHired().getTime())).append(";")
                     .append(DATE_FORMAT.format(employee.getFired().getTime())).append(";")
                     .append(employee.getSalary()).append(";")
-                    .append(System.lineSeparator());
+                    .append(SEPARATOR);
         }
         return text.toString();
     }

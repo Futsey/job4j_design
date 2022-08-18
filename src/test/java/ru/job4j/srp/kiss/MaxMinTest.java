@@ -1,8 +1,9 @@
-package ru.job4j.kiss;
+package ru.job4j.srp.kiss;
 
 import org.junit.Before;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import ru.job4j.kiss.MaxMin;
 
 import java.util.*;
 
