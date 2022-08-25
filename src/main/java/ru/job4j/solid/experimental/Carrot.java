@@ -2,8 +2,7 @@ package ru.job4j.solid.experimental;
 
 public class Carrot implements IVegetables {
 
-    /**На примере морковки рассмотрим нарушение принципа подстановки Liskov
-
+    /** На примере морковки рассмотрим нарушение принципа подстановки Liskov
      */
     private int weight;
 
