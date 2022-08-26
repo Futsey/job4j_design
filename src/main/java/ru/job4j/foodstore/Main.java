@@ -9,8 +9,12 @@ public class Main {
         LocalDateTime testDate = createDate.minusDays(1);
         LocalDateTime expDate = createDate.plusDays(4);
         Food food = new Meat("Pork", testDate, expDate, 590D, 0);
+        Food fruit = new Meat("Fruit", testDate, expDate, 300D, 0);
         System.out.println(food);
         QualityControl control = new QualityControl();
         control.getTimeDiffInPercent(testDate, expDate);
+        System.out.println("=============");
+        control.storeDistributor(control.getTimeDiffInPercent(testDate, expDate), food);
+        control.storeDistributor(control.getTimeDiffInPercent(testDate, expDate), fruit);
     }
 }
