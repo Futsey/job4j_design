@@ -2,7 +2,7 @@ package ru.job4j.foodstore;
 
 import java.time.LocalDateTime;
 
-public class Food {
+public abstract class Food {
 
     private String name;
     private LocalDateTime createDate;
@@ -51,7 +51,6 @@ public class Food {
     }
 
     public void setDiscount(int discount) {
-        setPrice(price - ((price / 100) * discount));
         this.discount = discount;
     }
 

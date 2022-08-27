@@ -5,16 +5,26 @@ import java.util.List;
 
 public class Trash implements Store {
 
-    private Repository saveToList = new SaveToList();
+    private QualityControl qc = new QualityControl();
     private List<Food> trashList = new ArrayList<>();
 
     @Override
-    public void add(Food product) {
-        saveToList.save(trashList, product);
-        System.out.println(product + " added to trashList");
+    public boolean add(Food product) {
+        boolean rsl = false;
+        if (product != null) {
+            trashList.add(product);
+            rsl = true;
+        }
+        return rsl;
     }
 
     public Food getProduct(int id) {
-        return ((SaveToList) saveToList).getProduct(trashList, id);
+        return trashList.get(id);
+    }
+
+    @Override
+    public Food getAllProducts() {
+        List<Food> copyProductList = List.copyOf(trashList);
+        return (Food) copyProductList;
     }
 }

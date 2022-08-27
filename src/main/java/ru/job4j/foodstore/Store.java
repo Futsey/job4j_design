@@ -2,6 +2,8 @@ package ru.job4j.foodstore;
 
 public interface Store {
 
-    void add(Food product);
-    Food getProduct(int id);
+    boolean add(Food product);
+    <E> E getAllProducts();
+    <E> E getProduct(int id);
+
 }

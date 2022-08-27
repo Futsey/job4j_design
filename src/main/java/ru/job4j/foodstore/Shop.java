@@ -6,23 +6,32 @@ import java.util.List;
 public class Shop implements Store {
 
     public static final int DISCOUNT = 15;
-    private Repository saveToList = new SaveToList();
+    private QualityControl qc = new QualityControl();
     private List<Food> productList = new ArrayList<>();
 
     @Override
-    public void add(Food product) {
-        saveToList.save(productList, product);
-        System.out.println("List size = " + productList.size());
-        System.out.println(product + " added to productList");
+    public boolean add(Food product) {
+        boolean rsl = false;
+        if (product != null) {
+            productList.add(product);
+            rsl = true;
+        }
+        return rsl;
     }
 
     public Food addDiscount(Food food) {
         food.setDiscount(DISCOUNT);
-        System.out.println("Product discount ".concat(food.toString()).concat(" is: ") + DISCOUNT + " %");
-        return new Food(food.getName(), food.getCreateDate(), food.getExpiryDate(), food.getPrice(), food.getDiscount());
+        food.setPrice(food.getPrice() - ((food.getPrice() / 100) * food.getDiscount()));
+        return food;
     }
 
     public Food getProduct(int id) {
-        return ((SaveToList) saveToList).getProduct(productList, id);
+        return productList.get(id);
+    }
+
+    @Override
+    public Food getAllProducts() {
+        List<Food> copyProductList = List.copyOf(productList);
+        return (Food) copyProductList;
     }
 }

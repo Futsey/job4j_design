@@ -17,49 +17,32 @@ class QualityControlTest {
     @Test
     public void whenAddToShop() {
         Store store = new Shop();
-        QualityControl control = new QualityControl();
         store.add(pork);
-        control.storeDistributor(control.getTimeDiffInPercent(testDate, expDate), pork);
         assertThat(pork).isEqualTo(store.getProduct(0));
     }
 
     @Test
     public void whenAddToWarehouse() {
         Store store = new Warehouse();
-        QualityControl control = new QualityControl();
         store.add(pork);
-        control.storeDistributor(control.getTimeDiffInPercent(testDate, expDate), pork);
         assertThat(pork).isEqualTo(store.getProduct(0));
     }
 
     @Test
     public void whenAddToTrash() {
         Store store = new Trash();
-        QualityControl control = new QualityControl();
         store.add(pork);
-        control.storeDistributor(control.getTimeDiffInPercent(testDate, expDate), pork);
         assertThat(pork).isEqualTo(store.getProduct(0));
     }
 
     @Test
-    void whenExpired() {
-        Store store = new Shop();
-        QualityControl control = new QualityControl();
-        expDate = createDate.minusDays(0);
-        store.add(pork);
-        Assertions.assertThrows(NullPointerException.class, () -> {
-            control.storeDistributor(control.getTimeDiffInPercent(testDate, expDate), pork);
-        });
-    }
-
-    @Test
     public void whenAddDiscount() {
+        LocalDateTime testCreateDate = createDate.minusDays(15);
         Store store = new Shop();
         QualityControl control = new QualityControl();
-        testDate = createDate.minusDays(1);
-        expDate = createDate.plusDays(11);
+        Food unbelievablePork = new Meat("Pork", testCreateDate, expDate, 590D, 0);
         store.add(pork);
-        control.storeDistributor(control.getTimeDiffInPercent(testDate, expDate), pork);
-        assertEquals(pork.getPrice(), 501.5);
+        control.storeDistributor(control.getTimeDiffInPercent(unbelievablePork), unbelievablePork);
+        assertEquals(unbelievablePork.getPrice(), 501.5);
     }
 }
