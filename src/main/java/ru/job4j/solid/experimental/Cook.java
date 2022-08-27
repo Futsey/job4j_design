@@ -23,7 +23,7 @@ public interface Cook {
 
     /** По итогу, дабы не нарушать принцип OCP в интерфейсе оставляем один расширяемый, но неизменяемый метод:
      * А вот чтобы приготовить суп, создадим предметный интерфейс
-     * @see ru.job4j.solid.experimental.CookSoup
+     * @see CookSoup
      */
     void cook();
 }

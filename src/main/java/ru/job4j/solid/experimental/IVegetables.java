@@ -5,13 +5,13 @@ public interface IVegetables extends IIngridients {
     /**
      * Теперь, в соответствии с принципом OCP мы получили возможность добавлять любые овощи в любое блюдо,
      * не только в суп и все благодаря абстрактному составному классу Ингридиентов.
-     * @see ru.job4j.solid.experimental.IIngridients
+     * @see IIngridients
      * Например, добавим картофель
-     * @see ru.job4j.solid.experimental.Potato
+     * @see Potato
      * и морковку
-     * @see ru.job4j.solid.experimental.Carrot
+     * @see Carrot
      * в наш многострадальный борщ
-     * @see ru.job4j.solid.experimental.Borsch
+     * @see Borsch
      */
     IIngridients addIngridient();
 }

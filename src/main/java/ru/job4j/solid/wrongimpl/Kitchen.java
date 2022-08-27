@@ -1,5 +1,7 @@
 package ru.job4j.solid.wrongimpl;
 
+import ru.job4j.solid.experimental.Truekitchen;
+
 public interface Kitchen {
 
     /** 1. Первое нарушение принципа SRP было бы в случае создания не интерфейса,
@@ -13,7 +15,7 @@ public interface Kitchen {
      * Начали вроде за здравие, создав кухню, где мы можем готовить и мыть, но в ходе реализации стало очевидно,
      * насколько все громоздко и неудобно получается. Предположу, что правильным решением было
      * бы сделать каждый метод не методом, а интерфейсом с собственным контрактом на узкоспецилализированные действия
-     * @see ru.job4j.solid.experimental.Truekitchen
+     * @see Truekitchen
      */
     void cook();
 

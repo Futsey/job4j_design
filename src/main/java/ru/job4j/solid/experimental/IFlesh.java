@@ -5,11 +5,11 @@ public interface IFlesh extends IIngridients {
     /**
      * Теперь, в соответствии с принципом OCP мы получили возможность добавлять любые овощи в любое блюдо,
      * не только в суп и все благодаря абстрактному составному классу Ингридиентов.
-     * @see ru.job4j.solid.experimental.IIngridients
+     * @see IIngridients
      * Например, добавим сало
-     * @see ru.job4j.solid.experimental.PorkFat
+     * @see PorkFat
      * в наш многострадальный борщ
-     * @see ru.job4j.solid.experimental.Borsch
+     * @see Borsch
      */
     IIngridients addIngridient();
 }
