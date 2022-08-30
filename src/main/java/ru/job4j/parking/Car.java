@@ -1,20 +1,8 @@
 package ru.job4j.parking;
 
-/** Класс является моделью данных для автомобилей
- */
-public abstract class Car implements Park {
+import java.util.ArrayList;
 
-    int carLength;
+public interface Car {
 
-    public Car(int carLength) {
-        this.carLength = carLength;
-    }
-
-    public int getCarLength() {
-        return carLength;
-    }
-
-    public void setCarLength(int carLength) {
-        this.carLength = carLength;
-    }
+    public int getNeededSpot();
 }

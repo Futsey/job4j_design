@@ -1,9 +1,10 @@
 package ru.job4j.parking;
 
+import java.util.List;
 
-/** Головной интерфейс, декларирующий главный процесс проекта - парковку
- */
 public interface Park {
 
-    <E> void park(E e);
+    boolean addCarInPark(Car auto);
+    List<Car> getAllPassengerCar();
+    List<Car> getAllTruckCar();
 }

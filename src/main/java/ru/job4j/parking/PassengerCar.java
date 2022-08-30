@@ -1,13 +1,24 @@
 package ru.job4j.parking;
 
-public class PassengerCar extends Car {
+public class PassengerCar implements Car {
 
-    public PassengerCar(int carLength) {
-        super(carLength);
+    public static final int PASSENGERCARLENGTH = 1;
+    String name;
+
+    public PassengerCar(String name) {
+        this.name = name;
     }
 
     @Override
-    public <E> void park(E e) {
+    public int getNeededSpot() {
+        return PASSENGERCARLENGTH;
+    }
 
+    @Override
+    public String toString() {
+        return "PassengerCar{"
+                + "carlength=" + PASSENGERCARLENGTH + " "
+                + "name " + name
+                + '}';
     }
 }
