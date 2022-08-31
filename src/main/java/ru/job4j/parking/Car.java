@@ -4,5 +4,6 @@ import java.util.ArrayList;
 
 public interface Car {
 
-    public int getNeededSpot();
+    int getNeededSpot();
+    String getName();
 }

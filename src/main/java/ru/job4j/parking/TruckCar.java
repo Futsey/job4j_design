@@ -2,10 +2,17 @@ package ru.job4j.parking;
 
 public class TruckCar implements Car {
 
-    int carLength;
-    String name;
+    private int carLength;
+    private String name;
 
     public TruckCar(int carLength, String name) {
+        if (carLength <= PassengerCar.PASSENGERCARLENGTH) {
+            try {
+                throw new IllegalArgumentException("Car length doesn`t match up truck length");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
         this.carLength = carLength;
         this.name = name;
     }
@@ -16,10 +23,15 @@ public class TruckCar implements Car {
     }
 
     @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
     public String toString() {
-        return "TruckCar{"
+        return "[TruckCar{"
                 + "carlength=" + carLength + " "
                 + "name " + name
-                + '}';
+                + "}]";
     }
 }

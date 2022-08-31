@@ -3,7 +3,7 @@ package ru.job4j.parking;
 public class PassengerCar implements Car {
 
     public static final int PASSENGERCARLENGTH = 1;
-    String name;
+    private String name;
 
     public PassengerCar(String name) {
         this.name = name;
@@ -15,10 +15,14 @@ public class PassengerCar implements Car {
     }
 
     @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
     public String toString() {
         return "PassengerCar{"
-                + "carlength=" + PASSENGERCARLENGTH + " "
-                + "name " + name
+                + "name='" + name + '\''
                 + '}';
     }
 }

@@ -2,7 +2,7 @@ package ru.job4j.parking;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         ParkingBoard board = new ParkingBoard(3, 2);
         Car pCar = new PassengerCar("pCar");
         board.addCarInPark(pCar);

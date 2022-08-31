@@ -1,20 +1,20 @@
 package ru.job4j.parking;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ParkingBoard implements Park {
 
-    private final List<Car> passengerCarStore;
-    private final List<Car> truckCarStore;
+    private final Set<Car> passengerCarStore;
+    private final Set<Car> truckCarStore;
     private int passengerCarSpot;
     private int truckCarSpot;
 
     public ParkingBoard(int passengerCarSpot, int truckCarSpot) {
         this.passengerCarSpot = passengerCarSpot;
         this.truckCarSpot = truckCarSpot;
-        passengerCarStore = new ArrayList<>(passengerCarSpot);
-        truckCarStore = new ArrayList<>(truckCarSpot);
+        passengerCarStore = new HashSet<>(passengerCarSpot);
+        truckCarStore = new HashSet<>(truckCarSpot);
     }
 
     @Override
@@ -52,12 +52,12 @@ public class ParkingBoard implements Park {
     }
 
     @Override
-    public List<Car> getAllPassengerCar() {
-        return new ArrayList<>(passengerCarStore);
+    public Set<Car> getAllPassengerCar() {
+        return new HashSet<>(passengerCarStore);
     }
 
     @Override
-    public List<Car> getAllTruckCar() {
-        return new ArrayList<>(truckCarStore);
+    public Set<Car> getAllTruckCar() {
+        return new HashSet<>(truckCarStore);
     }
 }

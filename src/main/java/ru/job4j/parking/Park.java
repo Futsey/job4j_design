@@ -1,10 +1,10 @@
 package ru.job4j.parking;
 
-import java.util.List;
+import java.util.Set;
 
 public interface Park {
 
     boolean addCarInPark(Car auto);
-    List<Car> getAllPassengerCar();
-    List<Car> getAllTruckCar();
+    Set<Car> getAllPassengerCar();
+    Set<Car> getAllTruckCar();
 }
