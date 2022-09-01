@@ -7,11 +7,7 @@ public class TruckCar implements Car {
 
     public TruckCar(int carLength, String name) {
         if (carLength <= PassengerCar.PASSENGERCARLENGTH) {
-            try {
-                throw new IllegalArgumentException("Car length doesn`t match up truck length");
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
+            throw new IllegalArgumentException("Car length doesn`t match up truck length");
         }
         this.carLength = carLength;
         this.name = name;

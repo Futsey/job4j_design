@@ -1,6 +1,7 @@
 package ru.job4j.parking;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 public class ParkingBoard implements Park {
@@ -22,7 +23,8 @@ public class ParkingBoard implements Park {
         boolean rsl = false;
         int carLength = car.getNeededSpot();
         System.out.println("=============");
-        if (carLength > PassengerCar.PASSENGERCARLENGTH) {
+        if (carLength > PassengerCar.PASSENGERCARLENGTH
+                && (!passengerCarStore.contains(car) || !truckCarStore.contains(car))) {
             if (truckCarSpot < PassengerCar.PASSENGERCARLENGTH && passengerCarSpot >= carLength) {
                 System.out.println("Spots at passengerCarSpot before adding: " + passengerCarSpot);
                 passengerCarStore.add(car);
@@ -59,5 +61,25 @@ public class ParkingBoard implements Park {
     @Override
     public Set<Car> getAllTruckCar() {
         return new HashSet<>(truckCarStore);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        ParkingBoard that = (ParkingBoard) o;
+        return passengerCarSpot == that.passengerCarSpot
+                && truckCarSpot == that.truckCarSpot
+                && Objects.equals(passengerCarStore, that.passengerCarStore)
+                && Objects.equals(truckCarStore, that.truckCarStore);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(passengerCarStore, truckCarStore, passengerCarSpot, truckCarSpot);
     }
 }

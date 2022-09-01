@@ -54,10 +54,10 @@ class ParkingBoardTest {
 
     @Test
     void whenLengthIsNotEnough() {
-        Throwable exception = assertThrows(RuntimeException.class, () -> {
+        Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
              Car tCar = new TruckCar(1, "tCar");
         });
-        assertEquals("java.lang.IllegalArgumentException: Car length doesn`t match up truck length",
+        assertEquals("Car length doesn`t match up truck length",
                 exception.getMessage());
     }
 }
