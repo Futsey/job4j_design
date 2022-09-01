@@ -5,7 +5,6 @@ import java.util.List;
 
 public class Warehouse implements Store {
 
-    private QualityControl qc = new QualityControl();
     private List<Food> warehouseList = new ArrayList<>();
 
     @Override
@@ -18,13 +17,22 @@ public class Warehouse implements Store {
         return rsl;
     }
 
+    @Override
+    public boolean accept(Food product) {
+        boolean rsl = false;
+        double percent = getTimeDiffInPercent(product);
+        if (percent < StoreModifires.WAREHOUSEFRESHNESS) {
+            rsl = true;
+        }
+        return rsl;
+    }
+
     public Food getProduct(int id) {
         return warehouseList.get(id);
     }
 
     @Override
-    public Food getAllProducts() {
-        List<Food> copyProductList = List.copyOf(warehouseList);
-        return (Food) copyProductList;
+    public ArrayList<Food> getAllProducts() {
+        return new ArrayList<Food>(warehouseList);
     }
 }
