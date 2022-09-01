@@ -12,9 +12,11 @@ public class Main {
         Food fruit = new Meat("Fruit", testDate, expDate, 300D, 0);
         System.out.println(food);
         QualityControl control = new QualityControl();
-//        control.getTimeDiffInPercent(food);
-//        System.out.println("=============");
-//        control.storeDistributor(control.getTimeDiffInPercent(food), food);
-//        control.storeDistributor(control.getTimeDiffInPercent(fruit), fruit);
+        /*
+        control.getTimeDiffInPercent(food);
+        System.out.println("=============");
+        control.storeDistributor(control.getTimeDiffInPercent(food), food);
+        control.storeDistributor(control.getTimeDiffInPercent(fruit), fruit);
+         */
     }
 }
