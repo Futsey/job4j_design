@@ -21,10 +21,12 @@ public class ParkingBoard implements Park {
     @Override
     public boolean addCarInPark(Car car) {
         boolean rsl = false;
+        if (passengerCarStore.contains(car) || truckCarStore.contains(car)) {
+            return rsl;
+        }
         int carLength = car.getNeededSpot();
         System.out.println("=============");
-        if (carLength > PassengerCar.PASSENGERCARLENGTH
-                && (!passengerCarStore.contains(car) || !truckCarStore.contains(car))) {
+        if (carLength > PassengerCar.PASSENGERCARLENGTH) {
             if (truckCarSpot < PassengerCar.PASSENGERCARLENGTH && passengerCarSpot >= carLength) {
                 System.out.println("Spots at passengerCarSpot before adding: " + passengerCarSpot);
                 passengerCarStore.add(car);

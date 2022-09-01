@@ -1,5 +1,7 @@
 package ru.job4j.parking;
 
+import java.util.Objects;
+
 public class PassengerCar implements Car {
 
     public static final int PASSENGERCARLENGTH = 1;
@@ -17,6 +19,23 @@ public class PassengerCar implements Car {
     @Override
     public String getName() {
         return name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        PassengerCar that = (PassengerCar) o;
+        return Objects.equals(name, that.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
     }
 
     @Override
