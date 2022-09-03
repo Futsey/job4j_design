@@ -2,8 +2,10 @@ package ru.job4j.foodstore;
 
 import org.junit.jupiter.api.Test;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class QualityControlTest {
 
@@ -16,33 +18,38 @@ class QualityControlTest {
     public void whenAddToShop() {
         Store store = new Shop();
         store.add(pork);
-        assertThat(pork).isEqualTo(store.getProduct(0));
+        assertThat(store.getAllProducts()).containsAll(List.of(pork));
     }
 
     @Test
     public void whenAddToWarehouse() {
         Store store = new Warehouse();
+        testDate = createDate.minusDays(1);
+        expDate = createDate.plusDays(12);
+        Food pork = new Meat("Pork", testDate, expDate, 590D, 0);
         store.add(pork);
-        assertThat(pork).isEqualTo(store.getProduct(0));
+        assertThat(store.getAllProducts()).containsAll(List.of(pork));
     }
 
     @Test
     public void whenAddToTrash() {
         Store store = new Trash();
+        testDate = createDate.plusDays(2);
+        expDate = createDate.plusDays(1);
+        Food pork = new Meat("Pork", testDate, expDate, 590D, 0);
         store.add(pork);
-        assertThat(pork).isEqualTo(store.getProduct(0));
+        assertThat(store.getAllProducts()).containsAll(List.of(pork));
     }
 
     /*
     @Test
     public void whenAddDiscount() {
-        LocalDateTime testCreateDate = createDate.minusDays(15);
         Store store = new Shop();
-        QualityControl control = new QualityControl();
-        Food unbelievablePork = new Meat("Pork", testCreateDate, expDate, 590D, 0);
+        testDate = createDate.minusDays(5);
+        expDate = createDate.plusDays(2);
+        Food pork = new Meat("Pork", testDate, expDate, 590D, 0);
         store.add(pork);
-        control.storeDistributor(control.getTimeDiffInPercent(unbelievablePork), unbelievablePork);
-        assertEquals(unbelievablePork.getPrice(), 501.5);
+        assertEquals(pork.getPrice(), 501.5);
     }
      */
 }

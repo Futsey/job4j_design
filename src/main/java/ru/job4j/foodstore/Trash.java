@@ -10,7 +10,7 @@ public class Trash implements Store {
     @Override
     public boolean add(Food product) {
         boolean rsl = false;
-        if (product != null) {
+        if (product != null && accept(product)) {
             trashList.add(product);
             rsl = true;
         }

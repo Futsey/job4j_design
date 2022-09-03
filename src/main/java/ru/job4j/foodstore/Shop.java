@@ -10,7 +10,13 @@ public class Shop implements Store {
     @Override
     public boolean add(Food product) {
         boolean rsl = false;
+        double percent = getTimeDiffInPercent(product);
         if (product != null && accept(product)) {
+            /*
+            if (percent >= StoreModifires.SHOPFRESHNESS && percent < StoreModifires.ROTTEN) {
+                addDiscount(product);
+            }
+             */
             productList.add(product);
             rsl = true;
         }
@@ -23,11 +29,7 @@ public class Shop implements Store {
         if (percent >= StoreModifires.WAREHOUSEFRESHNESS && percent <= StoreModifires.SHOPFRESHNESS) {
             rsl = true;
         }
-        if (percent >= StoreModifires.SHOPFRESHNESS && percent < StoreModifires.ROTTEN) {
-            Store store = new Shop();
-            ((Shop) store).addDiscount(product);
-            rsl = true;
-        }
+
         return rsl;
     }
 
