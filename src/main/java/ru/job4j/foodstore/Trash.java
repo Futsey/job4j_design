@@ -27,10 +27,6 @@ public class Trash implements Store {
         return rsl;
     }
 
-    public Food getProduct(int id) {
-        return trashList.get(id);
-    }
-
     @Override
     public ArrayList<Food> getAllProducts() {
         return new ArrayList<Food>(trashList);

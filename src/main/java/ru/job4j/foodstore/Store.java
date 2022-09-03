@@ -30,6 +30,4 @@ public interface Store {
     boolean accept(Food product);
     boolean add(Food product);
     <E> ArrayList<Food> getAllProducts();
-    <E> E getProduct(int id);
-
 }

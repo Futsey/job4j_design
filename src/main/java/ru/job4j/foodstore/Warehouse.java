@@ -27,10 +27,6 @@ public class Warehouse implements Store {
         return rsl;
     }
 
-    public Food getProduct(int id) {
-        return warehouseList.get(id);
-    }
-
     @Override
     public ArrayList<Food> getAllProducts() {
         return new ArrayList<Food>(warehouseList);

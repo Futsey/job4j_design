@@ -12,11 +12,9 @@ public class Shop implements Store {
         boolean rsl = false;
         double percent = getTimeDiffInPercent(product);
         if (product != null && accept(product)) {
-            /*
             if (percent >= StoreModifires.SHOPFRESHNESS && percent < StoreModifires.ROTTEN) {
                 addDiscount(product);
             }
-             */
             productList.add(product);
             rsl = true;
         }
@@ -26,7 +24,8 @@ public class Shop implements Store {
     public boolean accept(Food product) {
         boolean rsl = false;
         double percent = getTimeDiffInPercent(product);
-        if (percent >= StoreModifires.WAREHOUSEFRESHNESS && percent <= StoreModifires.SHOPFRESHNESS) {
+        if (percent >= StoreModifires.WAREHOUSEFRESHNESS && percent <= StoreModifires.SHOPFRESHNESS
+                || percent >= StoreModifires.SHOPFRESHNESS && percent < StoreModifires.ROTTEN) {
             rsl = true;
         }
 
@@ -37,10 +36,6 @@ public class Shop implements Store {
         food.setDiscount(StoreModifires.DISCOUNT);
         food.setPrice(food.getPrice() - ((food.getPrice() / 100) * food.getDiscount()));
         return food;
-    }
-
-    public Food getProduct(int id) {
-        return productList.get(id);
     }
 
     @Override
