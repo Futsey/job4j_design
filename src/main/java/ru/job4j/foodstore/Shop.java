@@ -24,15 +24,13 @@ public class Shop implements Store {
     public boolean accept(Food product) {
         boolean rsl = false;
         double percent = getTimeDiffInPercent(product);
-        if (percent >= StoreModifires.WAREHOUSEFRESHNESS && percent <= StoreModifires.SHOPFRESHNESS
-                || percent >= StoreModifires.SHOPFRESHNESS && percent < StoreModifires.ROTTEN) {
+        if (percent > StoreModifires.WAREHOUSEFRESHNESS && percent < StoreModifires.ROTTEN) {
             rsl = true;
         }
-
         return rsl;
     }
 
-    public Food addDiscount(Food food) {
+    private Food addDiscount(Food food) {
         food.setDiscount(StoreModifires.DISCOUNT);
         food.setPrice(food.getPrice() - ((food.getPrice() / 100) * food.getDiscount()));
         return food;
