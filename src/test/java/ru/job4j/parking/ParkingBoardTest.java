@@ -1,6 +1,7 @@
 package ru.job4j.parking;
 
 import org.junit.jupiter.api.Test;
+import ru.job4j.solid.lsp.parking.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 

@@ -1,16 +1,16 @@
 package ru.job4j.srp;
 
-import com.google.gson.GsonBuilder;
 import org.junit.jupiter.api.Test;
+import ru.job4j.solid.srpocp.*;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static ru.job4j.srp.ReportEngine.DATE_FORMAT;
-import static ru.job4j.srp.ReportFinance.EURO;
-import static ru.job4j.srp.ReportForProg.SEPARATOR;
+import static ru.job4j.solid.srpocp.ReportEngine.DATE_FORMAT;
+import static ru.job4j.solid.srpocp.ReportFinance.EURO;
+import static ru.job4j.solid.srpocp.ReportForProg.SEPARATOR;
 
 class ReportEngineTest {
 

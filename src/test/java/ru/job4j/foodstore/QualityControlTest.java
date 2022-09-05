@@ -1,6 +1,8 @@
 package ru.job4j.foodstore;
 
 import org.junit.jupiter.api.Test;
+import ru.job4j.solid.lsp.foodstore.*;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
