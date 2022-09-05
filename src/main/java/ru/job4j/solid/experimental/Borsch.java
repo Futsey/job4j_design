@@ -26,6 +26,26 @@ public class Borsch implements Cook {
                 .concat(String.valueOf(new Borsch(potato, carrot, porkFat))));
     }
 
+    /** Третьим нарушением принципа ISP будет отсутствие реализации методов интерфейса в конкретном классе.
+     * Мы же не можем пожарить суп (хотя иногда и получается...). И если два метода cookMeat() и cookVegetables()
+     * как-то можно за уши подтянуть в реализации (борщ с мясом, борщ только с овощами),
+     * то об искусстве жарить борщ среднестатистическая хозяйка вряд-ли слышала
+     */
+    @Override
+    public void cookMeat() {
+
+    }
+
+    @Override
+    public void cookVegetables() {
+
+    }
+
+    @Override
+    public void fry() {
+
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

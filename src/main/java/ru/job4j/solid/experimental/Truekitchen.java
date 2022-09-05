@@ -43,4 +43,19 @@ public class Truekitchen implements Cook, Wash {
     public void cook() {
         System.out.println("Truekitchen{}: cook(): начинаем готовить что-то абстрактное!");
     }
+
+    @Override
+    public void cookMeat() {
+
+    }
+
+    @Override
+    public void cookVegetables() {
+
+    }
+
+    @Override
+    public void fry() {
+
+    }
 }
