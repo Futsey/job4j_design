@@ -3,7 +3,7 @@ package ru.job4j.solid.experimental;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        IIngridients potato = new Potato();
+        Potato potato = new Potato();
         IIngridients carrot = new Carrot(33);
         IIngridients porkFat = new PorkFat();
         Cook soup = new Borsch(potato, carrot, porkFat);
