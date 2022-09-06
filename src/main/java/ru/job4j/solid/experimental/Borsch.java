@@ -6,12 +6,16 @@ public class Borsch implements Cook {
 
     /**Абстрактные поля класса помогают нам создавать гибкий суповой набор
      *
+     * Однако, в данном случае мы можем нарушить принцип DIP, добавив в поле не абстракцию IIngridients,
+     * а прям Potato potato, привязав наш рецепт к конкретному классу картофеля,
+     * тем самым выстроив прямую зависимость от нижестоящего класса на уровне поля класса.
+     * Решение - использовать абстракцию IIngridients.
      */
-    IIngridients potato;
+    Potato potato;
     IIngridients carrot;
     IIngridients porkFat;
 
-    public Borsch(IIngridients potato, IIngridients carrot, IIngridients porkFat) {
+    public Borsch(Potato potato, IIngridients carrot, IIngridients porkFat) {
         this.potato = potato;
         this.carrot = carrot;
         this.porkFat = porkFat;
@@ -43,6 +47,14 @@ public class Borsch implements Cook {
 
     @Override
     public void fry() {
+
+    }
+
+    /** Уже давно обезобразил весь проект experimental, а потому без стыда добавим наш многострадальный Potato potato
+     * в аргумент нового рецепта борща с большим количеством картошки. Необходимость самого метода за рамками оставим,
+     * но если все-таки он нужен, то в аргументе, в рамках принципа DIP нам нужна абстракция IIngridients ingridients
+     */
+    public void doublePotato(Potato potato) {
 
     }
 

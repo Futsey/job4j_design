@@ -8,9 +8,13 @@ public class Ingridients implements IIngridients {
         this.ingridients = ingridients;
     }
 
+    /** Нарушим и сдесь принцип DIP, вернув в методе не абстрактный ингридент из конструктора,
+     * а вполне себе конкретный Potato potato.
+     * @return new Potato()
+     */
     @Override
     public IIngridients addIngridient() {
-        return new Ingridients(ingridients);
+        return new Potato();
     }
 
     @Override
