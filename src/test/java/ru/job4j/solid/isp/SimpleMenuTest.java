@@ -13,22 +13,21 @@ class SimpleMenuTest {
     @Test
     public void whenAddThenReturnSame() {
         Menu menu = new SimpleMenu();
-        menu.add(Menu.ROOT, "Ñõîäèòü â ìàãàçèí", STUB_ACTION);
-        menu.add(Menu.ROOT, "Ïîêîğìèòü ñîáàêó", STUB_ACTION);
-        menu.add("Ñõîäèòü â ìàãàçèí", "Êóïèòü ïğîäóêòû", STUB_ACTION);
-        menu.add("Êóïèòü ïğîäóêòû", "Êóïèòü õëåá", STUB_ACTION);
-        menu.add("Êóïèòü ïğîäóêòû", "Êóïèòü ìîëîêî", STUB_ACTION);
-        assertThat(new Menu.MenuItemInfo("Ñõîäèòü â ìàãàçèí",
-                List.of("Êóïèòü ïğîäóêòû"), STUB_ACTION, "1."))
-                .isEqualTo(menu.select("Ñõîäèòü â ìàãàçèí").get());
+        menu.add(Menu.ROOT, "Ğ¡Ñ…Ğ¾Ğ´Ğ¸Ñ‚ÑŒ Ğ² Ğ¼Ğ°Ğ³Ğ°Ğ·Ğ¸Ğ½", STUB_ACTION);
+        menu.add(Menu.ROOT, "ĞŸĞ¾ĞºĞ¾Ñ€Ğ¼Ğ¸Ñ‚ÑŒ ÑĞ¾Ğ±Ğ°ĞºÑƒ", STUB_ACTION);
+        menu.add("Ğ¡Ñ…Ğ¾Ğ´Ğ¸Ñ‚ÑŒ Ğ² Ğ¼Ğ°Ğ³Ğ°Ğ·Ğ¸Ğ½", "ĞšÑƒĞ¿Ğ¸Ñ‚ÑŒ Ğ¿Ñ€Ğ¾Ğ´ÑƒĞºÑ‚Ñ‹", STUB_ACTION);
+        menu.add("ĞšÑƒĞ¿Ğ¸Ñ‚ÑŒ Ğ¿Ñ€Ğ¾Ğ´ÑƒĞºÑ‚Ñ‹", "ĞšÑƒĞ¿Ğ¸Ñ‚ÑŒ Ñ…Ğ»ĞµĞ±", STUB_ACTION);
+        menu.add("ĞšÑƒĞ¿Ğ¸Ñ‚ÑŒ Ğ¿Ñ€Ğ¾Ğ´ÑƒĞºÑ‚Ñ‹", "ĞšÑƒĞ¿Ğ¸Ñ‚ÑŒ Ğ¼Ğ¾Ğ»Ğ¾ĞºĞ¾", STUB_ACTION);
+        assertThat(new Menu.MenuItemInfo("Ğ¡Ñ…Ğ¾Ğ´Ğ¸Ñ‚ÑŒ Ğ² Ğ¼Ğ°Ğ³Ğ°Ğ·Ğ¸Ğ½",
+                List.of("ĞšÑƒĞ¿Ğ¸Ñ‚ÑŒ Ğ¿Ñ€Ğ¾Ğ´ÑƒĞºÑ‚Ñ‹"), STUB_ACTION, "1."))
+                .isEqualTo(menu.select("Ğ¡Ñ…Ğ¾Ğ´Ğ¸Ñ‚ÑŒ Ğ² Ğ¼Ğ°Ğ³Ğ°Ğ·Ğ¸Ğ½").get());
         assertThat(new Menu.MenuItemInfo(
-                "Êóïèòü ïğîäóêòû",
-                List.of("Êóïèòü õëåá", "Êóïèòü ìîëîêî"), STUB_ACTION, "1.1."))
-                .isEqualTo(menu.select("Êóïèòü ïğîäóêòû").get());
+                "ĞšÑƒĞ¿Ğ¸Ñ‚ÑŒ Ğ¿Ñ€Ğ¾Ğ´ÑƒĞºÑ‚Ñ‹",
+                List.of("ĞšÑƒĞ¿Ğ¸Ñ‚ÑŒ Ñ…Ğ»ĞµĞ±", "ĞšÑƒĞ¿Ğ¸Ñ‚ÑŒ Ğ¼Ğ¾Ğ»Ğ¾ĞºĞ¾"), STUB_ACTION, "1.1."))
+                .isEqualTo(menu.select("ĞšÑƒĞ¿Ğ¸Ñ‚ÑŒ Ğ¿Ñ€Ğ¾Ğ´ÑƒĞºÑ‚Ñ‹").get());
         assertThat(new Menu.MenuItemInfo(
-                "Ïîêîğìèòü ñîáàêó", List.of(), STUB_ACTION, "2."))
-                .isEqualTo(menu.select("Ïîêîğìèòü ñîáàêó").get());
+                "ĞŸĞ¾ĞºĞ¾Ñ€Ğ¼Ğ¸Ñ‚ÑŒ ÑĞ¾Ğ±Ğ°ĞºÑƒ", List.of(), STUB_ACTION, "2."))
+                .isEqualTo(menu.select("ĞŸĞ¾ĞºĞ¾Ñ€Ğ¼Ğ¸Ñ‚ÑŒ ÑĞ¾Ğ±Ğ°ĞºÑƒ").get());
         menu.forEach(i -> System.out.println(i.getNumber() + i.getName()));
     }
-
 }

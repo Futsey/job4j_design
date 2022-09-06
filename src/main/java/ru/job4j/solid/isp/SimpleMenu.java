@@ -1,12 +1,13 @@
 package ru.job4j.solid.isp;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Класс реализует работу интерфейса
  * @see Menu
  */
-public class SimpleMenu  implements Menu {
+public class SimpleMenu implements Menu {
 
     /**
      * Лист rootElements хранит в себе перечень корневых пунктов (экземпляров) Меню
@@ -18,7 +19,21 @@ public class SimpleMenu  implements Menu {
      */
     @Override
     public boolean add(String parentName, String childName, ActionDelegate actionDelegate) {
-        return false;
+        boolean rsl = false;
+        boolean checkChild = findItem(childName).isEmpty();
+        if (checkChild && Objects.equals(parentName, Menu.ROOT)) {
+            MenuItem item = new SimpleMenuItem(childName, actionDelegate);
+            rootElements.add(item);
+            rsl = true;
+        } else if (checkChild) {
+            Optional<ItemInfo> parent = findItem(parentName);
+            if (parent.isPresent()) {
+                parent.map(x -> x.menuItem.getChildren())
+                        .ifPresent(x -> x.add(new SimpleMenuItem(childName, actionDelegate)));
+                rsl = true;
+            }
+        }
+        return rsl;
     }
 
     /**
@@ -29,12 +44,8 @@ public class SimpleMenu  implements Menu {
      */
     @Override
     public Optional<MenuItemInfo> select(String itemName) {
-        Optional<MenuItemInfo> rsl = Optional.empty();
-        if (findItem(itemName).isPresent()) {
-            rsl = Optional.of(new MenuItemInfo(findItem(itemName).get().menuItem,
-                    findItem(itemName).get().number));
-        }
-        return rsl;
+        return findItem(itemName).map(s -> new MenuItemInfo(s.menuItem,
+                s.number));
     }
 
     /**
@@ -52,9 +63,6 @@ public class SimpleMenu  implements Menu {
 
             @Override
             public MenuItemInfo next() {
-                if (!hasNext()) {
-                    throw new NoSuchElementException();
-                }
                 ItemInfo itemInfo = dfsIterator.next();
                 return new MenuItemInfo(itemInfo.menuItem, itemInfo.number);
             }
@@ -71,10 +79,25 @@ public class SimpleMenu  implements Menu {
         Optional<ItemInfo> rsl = Optional.empty();
         while (iterator.hasNext()) {
             ItemInfo itemInfo = iterator.next();
-            rsl = Optional.of(itemInfo);
-            break;
+            if (name.equals(itemInfo.menuItem.getName())) {
+                rsl = Optional.of(itemInfo);
+                break;
+            }
         }
         return rsl;
+    }
+
+    /**
+     * Метод позволяет найти все пункты (экземпляры) Меню.
+     * @return Optional.empty() либо пункты (экземпляр) Меню
+     */
+    public void showItems(Menu menu) {
+        if (rootElements.size() > 0) {
+            ConsolePrint print = new ConsolePrint();
+            print.print(menu);
+        } else {
+            System.out.println("No tasks for today");
+        }
     }
 
     /**
@@ -146,7 +169,6 @@ public class SimpleMenu  implements Menu {
             }
             return new ItemInfo(current, lastNumber);
         }
-
     }
 
     private class ItemInfo {

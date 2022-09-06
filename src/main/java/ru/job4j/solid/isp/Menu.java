@@ -16,6 +16,7 @@ public interface Menu extends Iterable<Menu.MenuItemInfo> {
     boolean add(String parentName, String childName, ActionDelegate actionDelegate);
 
     Optional<MenuItemInfo> select(String itemName);
+    void showItems(Menu menu);
 
     class MenuItemInfo {
 
