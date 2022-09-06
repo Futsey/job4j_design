@@ -73,4 +73,26 @@ class QualityControlTest {
         assertThat(warehouse.getAllProducts()).containsAll(List.of(warehousePork));
         assertThat(trash.getAllProducts()).containsAll(List.of(trashPork));
     }
+
+    @Test
+    public void whenResort() {
+        testDate = createDate.minusDays(1);
+        expDate = createDate.plusDays(2);
+        Food shopPork = new Meat("shopPork", testDate, expDate, 590D, 0);
+        Food shopPork2 = new Meat("shopPork2", testDate, expDate, 590D, 0);
+        qc.addFood(shopPork);
+        qc.addFood(shopPork2);
+        testDate = createDate.minusDays(1);
+        expDate = createDate.plusDays(14);
+        Food warehousePork = new Meat("warehousePork", testDate, expDate, 590D, 0);
+        qc.addFood(warehousePork);
+        testDate = createDate.minusDays(6);
+        expDate = createDate.minusDays(1);
+        Food trashPork = new Meat("trashPork", testDate, expDate, 590D, 0);
+        qc.addFood(trashPork);
+        qc.resort();
+        assertThat(shop.getAllProducts()).containsAll(List.of(shopPork, shopPork2));
+        assertThat(warehouse.getAllProducts()).containsAll(List.of(warehousePork));
+        assertThat(trash.getAllProducts()).containsAll(List.of(trashPork));
+    }
 }
