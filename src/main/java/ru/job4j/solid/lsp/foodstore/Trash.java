@@ -18,6 +18,11 @@ public class Trash implements Store {
     }
 
     @Override
+    public void clear() {
+        trashList.clear();
+    }
+
+    @Override
     public boolean accept(Food product) {
         boolean rsl = false;
         double percent = getTimeDiffInPercent(product);

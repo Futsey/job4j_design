@@ -24,6 +24,7 @@ public class QualityControl {
         List<Food> productList = new ArrayList<>();
         for (Store store : storages) {
             productList.addAll(store.getAllProducts());
+            store.clear();
         }
         for (Food food : productList) {
             addFood(food);

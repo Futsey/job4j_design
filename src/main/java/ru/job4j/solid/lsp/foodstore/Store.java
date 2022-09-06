@@ -2,6 +2,7 @@ package ru.job4j.solid.lsp.foodstore;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
@@ -29,5 +30,6 @@ public interface Store {
 
     boolean accept(Food product);
     boolean add(Food product);
+    void clear();
     <E> ArrayList<Food> getAllProducts();
 }

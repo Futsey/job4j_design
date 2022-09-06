@@ -21,6 +21,11 @@ public class Shop implements Store {
         return rsl;
     }
 
+    @Override
+    public void clear() {
+        productList.clear();
+    }
+
     public boolean accept(Food product) {
         boolean rsl = false;
         double percent = getTimeDiffInPercent(product);

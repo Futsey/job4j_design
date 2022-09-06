@@ -18,6 +18,11 @@ public class Warehouse implements Store {
     }
 
     @Override
+    public void clear() {
+        warehouseList.clear();
+    }
+
+    @Override
     public boolean accept(Food product) {
         boolean rsl = false;
         double percent = getTimeDiffInPercent(product);
