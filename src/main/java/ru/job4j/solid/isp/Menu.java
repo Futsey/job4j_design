@@ -16,7 +16,6 @@ public interface Menu extends Iterable<Menu.MenuItemInfo> {
     boolean add(String parentName, String childName, ActionDelegate actionDelegate);
 
     Optional<MenuItemInfo> select(String itemName);
-    void showItems(Menu menu);
 
     class MenuItemInfo {
 
@@ -80,6 +79,16 @@ public interface Menu extends Iterable<Menu.MenuItemInfo> {
         @Override
         public int hashCode() {
             return Objects.hash(name, children, number);
+        }
+
+        @Override
+        public String toString() {
+            return "MenuItemInfo{" +
+                    "name='" + name + '\'' +
+                    ", children=" + children +
+                    ", actionDelegate=" + actionDelegate +
+                    ", number='" + number + '\'' +
+                    '}';
         }
     }
 }

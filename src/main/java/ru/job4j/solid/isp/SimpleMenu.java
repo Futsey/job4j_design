@@ -21,6 +21,9 @@ public class SimpleMenu implements Menu {
     public boolean add(String parentName, String childName, ActionDelegate actionDelegate) {
         boolean rsl = false;
         boolean checkChild = findItem(childName).isEmpty();
+        if (findItem(childName).isPresent()) {
+            return false;
+        }
         if (checkChild && Objects.equals(parentName, Menu.ROOT)) {
             MenuItem item = new SimpleMenuItem(childName, actionDelegate);
             rootElements.add(item);
@@ -28,8 +31,7 @@ public class SimpleMenu implements Menu {
         } else if (checkChild) {
             Optional<ItemInfo> parent = findItem(parentName);
             if (parent.isPresent()) {
-                parent.map(x -> x.menuItem.getChildren())
-                        .ifPresent(x -> x.add(new SimpleMenuItem(childName, actionDelegate)));
+                parent.get().menuItem.getChildren().add(new SimpleMenuItem(childName, actionDelegate));
                 rsl = true;
             }
         }
@@ -85,19 +87,6 @@ public class SimpleMenu implements Menu {
             }
         }
         return rsl;
-    }
-
-    /**
-     * Метод позволяет найти все пункты (экземпляры) Меню.
-     * @return Optional.empty() либо пункты (экземпляр) Меню
-     */
-    public void showItems(Menu menu) {
-        if (rootElements.size() > 0) {
-            ConsolePrint print = new ConsolePrint();
-            print.print(menu);
-        } else {
-            System.out.println("No tasks for today");
-        }
     }
 
     /**
@@ -180,5 +169,12 @@ public class SimpleMenu implements Menu {
             this.menuItem = menuItem;
             this.number = number;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "SimpleMenu{" +
+                "rootElements=" + rootElements +
+                '}';
     }
 }

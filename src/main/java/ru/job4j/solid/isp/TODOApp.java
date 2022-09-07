@@ -36,7 +36,8 @@ public class TODOApp {
     }
 
     private void showMenu() throws IOException {
-        menu.showItems(menu);
+        MenuPrinter print = new ConsolePrint();
+        print.print(menu);
         showMainMenu();
     }
 
