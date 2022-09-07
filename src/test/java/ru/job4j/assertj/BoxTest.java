@@ -2,8 +2,6 @@ package ru.job4j.assertj;
 
 import org.junit.jupiter.api.Test;
 
-import java.text.DecimalFormat;
-
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -25,13 +23,13 @@ class BoxTest {
     }
 
     @Test
-    void FigureExist() {
+    void ifFigureExist() {
         Box box = new Box(8, 10);
         assertTrue(box.isExist());
     }
 
     @Test
-    void FigureDoesNotExist() {
+    void ifFigureDoesNotExist() {
         Box box = new Box(-3, 0);
         assertFalse(box.isExist());
     }
