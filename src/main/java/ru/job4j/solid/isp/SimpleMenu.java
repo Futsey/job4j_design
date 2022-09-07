@@ -170,11 +170,4 @@ public class SimpleMenu implements Menu {
             this.number = number;
         }
     }
-
-    @Override
-    public String toString() {
-        return "SimpleMenu{" +
-                "rootElements=" + rootElements +
-                '}';
-    }
 }

@@ -1,10 +1,6 @@
 package ru.job4j.solid.isp;
 
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
-import ru.job4j.solid.lsp.parking.Car;
-import ru.job4j.solid.lsp.parking.TruckCar;
-
 import java.util.List;
 import java.util.NoSuchElementException;
 
