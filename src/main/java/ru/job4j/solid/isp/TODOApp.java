@@ -8,10 +8,12 @@ public class TODOApp {
 
     public static final ActionDelegate STUB_ACTION = System.out::println;
     private static final String SEPARATOR = System.lineSeparator();
-    private static final String MAINMENU = "Welcome! Any task you need to: "
-            .concat(SEPARATOR).concat("1. Show me my tasks")
-            .concat(SEPARATOR).concat("2. Find my task")
-            .concat(SEPARATOR).concat("3. Add a task");
+    private static final String MAINMENU = """
+                            Welcome! Any task you need to:
+                            1. Show me my tasks
+                            2. Find my task
+                            3. Add a task
+                            """;
     private Menu menu = new SimpleMenu();
     private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 

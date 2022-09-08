@@ -2,15 +2,15 @@ package ru.job4j.solid.isp;
 
 public class ConsolePrint implements MenuPrinter {
 
-    public static final String INDENT = "----";
+    public static final String INDENT = "--";
     public static final String SEPARATOR = System.lineSeparator();
 
     public void print(Menu menu) {
-        StringBuilder builder = new StringBuilder();
-        menu.forEach(x -> {
-            builder.append(INDENT.repeat((x.getNumber().length() / 2)));
-            builder.append(x.getNumber()).append(x.getName()).append(SEPARATOR);
-        });
-        System.out.println(builder);
+        for (Menu.MenuItemInfo menuItemInfo : menu) {
+            int count = menuItemInfo.getNumber().split("\\.").length - 1;
+            System.out.println(INDENT.repeat(count)
+                    + menuItemInfo.getNumber()
+                    + menuItemInfo.getName());
+        }
     }
 }
