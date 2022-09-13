@@ -78,7 +78,6 @@
         returns trigger as
     $$
         begin
-            update products
             new.price = new.price + new.price * 0.1;
             return new;
         end;
