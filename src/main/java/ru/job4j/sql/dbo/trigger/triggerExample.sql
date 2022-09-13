@@ -79,8 +79,8 @@
     $$
         begin
             update products
-            set price = price - price * 0.2
-            where id = new.id;
+            new.price = new.price + new.price * 0.1;
+            return new;
             return new;
         end;
     $$
