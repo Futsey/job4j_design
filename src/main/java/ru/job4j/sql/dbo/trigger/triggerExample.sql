@@ -81,7 +81,6 @@
             update products
             new.price = new.price + new.price * 0.1;
             return new;
-            return new;
         end;
     $$
     LANGUAGE 'plpgsql';
